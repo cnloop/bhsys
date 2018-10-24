@@ -97,7 +97,7 @@ td {
 
 @font-face {
   font-family: "iconfont"; /* project id 858289 */
-  src: url("//at.alicdn.com/t/font_858289_ixaksi13ld.woff") format("woff");
+  src: url("//at.alicdn.com/t/font_858289_d1mu9vgsyel.woff") format("woff");
 }
 
 .iconfont {
@@ -174,9 +174,5 @@ body {
   right: 0;
   bottom: 0;
   box-sizing: border-box;
-}
-
-.active {
-  color: #26c5d1 !important;
 }
 </style>

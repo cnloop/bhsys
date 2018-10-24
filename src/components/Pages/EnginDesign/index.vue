@@ -1,29 +1,57 @@
 <template>
   <section class="enginDesign">
     <section class="enginDesign-left">
-      <left-aside></left-aside>
+      <left-aside :navData="navData"></left-aside>
     </section>
     <section class="enginDesign-right">
-      <section class="nav-bar-current-wrap">
-        <nav-bar-current></nav-bar-current>
-      </section>
-      <section class="nav-bar-tab-wrap">
-        <nav-bar-tab></nav-bar-tab>
-      </section>
-
+      <router-view></router-view>
     </section>
   </section>
 </template>
 <script>
 import LeftAside from "@/components/Layout/Aside/LeftAside";
-import NavBarCurrent from "@/components/Layout/NavBar/NavBarCurrent";
-import NavBarTab from "@/components/Layout/NavBar/NavBarTab";
 
 export default {
+  data() {
+    return {
+      navData: [
+        {
+          title: {
+            icon: "&#xe621;",
+            text: "设计成果"
+          },
+          items: [
+            {
+              text: "设计管理",
+              routerText: "design-mgt"
+            },
+            {
+              text: "工程文档",
+              routerText: "engineering-doc"
+            }
+          ],
+          routerText: "design-result",
+          parentRouterText: "engin-design"
+        },
+        {
+          title: {
+            icon: "&#xe621;",
+            text: "成果分类设置"
+          },
+          items: [
+            {
+              text: "成果分类设置",
+              routerText: "class-setUp"
+            }
+          ],
+          routerText: "design-setUp",
+          parentRouterText: "engin-design"
+        }
+      ]
+    };
+  },
   components: {
-    LeftAside,
-    NavBarCurrent,
-    NavBarTab
+    LeftAside
   }
 };
 </script>
@@ -47,12 +75,6 @@ export default {
   right: 0px;
   left: 228px;
   bottom: 0px;
-}
-.enginDesign-right > .nav-bar-current-wrap {
-  height: 46px;
-}
-.enginDesign-right > .nav-bar-tab-wrap {
-  height: 56px;
 }
 </style>
 

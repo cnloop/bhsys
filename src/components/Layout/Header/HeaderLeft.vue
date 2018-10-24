@@ -9,17 +9,17 @@ export default {};
 </script>
 <style scoped>
 .headerLeft {
-  line-height: 40px;
+  line-height: 34px;
 }
 .headerLeft > img {
-  height: 40px;
+  height: 34px;
 }
 .headerLeft > h1 {
   display: inline;
   padding-left: 10px;
   color: #36c8ea;
   font-weight: 300;
-  font-size: 24px;
+  font-size: 22px;
   transform: translateY(-1px);
 }
 </style>

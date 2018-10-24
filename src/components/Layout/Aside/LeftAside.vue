@@ -1,62 +1,55 @@
 <template>
-  <section class="aside">
-    <div class="mainmenu" ref="content-manager" v-showMenuItems>
+  <section class="leftAside">
+    <div v-for="item in navData" :key="item.routerText" class="leftAside-mainmenu" :ref="item.routerText" v-showMenuItems>
       <div class="mainmenu-title">
         <div class="left">
           <span>
             <i class="iconfont">&#xe621;</i>
           </span>
-          <span>内容管理</span>
+          <span>{{item.title.text}}</span>
         </div>
         <div class="right">
           <i class="iconfont arrow">&#xe634;</i>
         </div>
       </div>
-      <div class="menu-items-container">
-        <router-link class="menu-item" to="/content-manager/article">文章管理</router-link>
-        <router-link class="menu-item" to="/content-manager/comment">评论管理</router-link>
-      </div>
-    </div>
-    <div class="mainmenu" ref="user-manager" v-showMenuItems>
-      <div class="mainmenu-title">
-        <div class="left">
-          <span>
-            <i class="iconfont">&#xe621;</i>
-          </span>
-          <span>用户管理</span>
-        </div>
-        <div class="right">
-          <i class="iconfont arrow">&#xe634;</i>
-        </div>
-      </div>
-      <div class="menu-items-container">
-        <router-link class="menu-item" to="/user-manager/new-user">新增用户</router-link>
-        <router-link class="menu-item" to="/user-manager/active-user">新增用户</router-link>
+      <div class="mainmenu-item-wrap">
+        <router-link :to="`/${item.parentRouterText}/${item.routerText}/${val.routerText}`" v-for="val in item.items" :key="val.text" class="mainmenu-item">{{val.text}}</router-link>
       </div>
     </div>
   </section>
 </template>
 <script>
 export default {
+  props: ["navData", "currentPositon"],
   data() {
     return {
-      navData:[],
-      mainTitles: ["content-manager", "user-manager"]
+      // mainTitles: ["design-result", "design-setUp"]
     };
   },
   methods: {
-    // watch => $router, open drawer
+    // 激活菜单，watch中调用
     async showItems(mainTitle) {
       await this.$nextTick(function() {
-        this.$refs[mainTitle].style.height = `${
-          this.$refs[mainTitle].actualHeight
+        this.$refs[mainTitle][0].style.height = `${
+          this.$refs[mainTitle][0].actualHeight
         }px`;
         this.$refs[
           mainTitle
-        ].firstChild.childNodes[2].firstChild.style.transform = "rotate(90deg)";
-        this.$refs[mainTitle].isStretch = true;
+        ][0].firstChild.childNodes[2].firstChild.style.transform =
+          "rotate(90deg)";
+        this.$refs[mainTitle][0].isStretch = true;
       });
-    }
+    },
+    // 激活菜单，watch中调用
+    activeMenu(val) {
+      for (let i = 0; i < this.navData.length; i++) {
+        if (val.path.indexOf(this.navData[i].routerText) > 0) {
+          setTimeout(() => {
+            this.showItems(this.navData[i].routerText);
+          }, 0);
+        }
+      }
+    },
   },
   directives: {
     showMenuItems: {
@@ -83,13 +76,15 @@ export default {
             var arrMenu = vnode.context.$refs;
             if (Object.keys(arrMenu).length !== 0) {
               for (const key in arrMenu) {
-                if (arrMenu[key].isStretch) {
-                  arrMenu[key].style.height = `${arrMenu[key].titleHeight}px`;
+                if (arrMenu[key][0].isStretch) {
+                  arrMenu[key][0].style.height = `${
+                    arrMenu[key][0].titleHeight
+                  }px`;
                   arrMenu[
                     key
-                  ].firstChild.childNodes[2].firstChild.style.transform =
+                  ][0].firstChild.childNodes[2].firstChild.style.transform =
                     "rotate(0deg)";
-                  arrMenu[key].isStretch = !arrMenu[key].isStretch;
+                  arrMenu[key][0].isStretch = !arrMenu[key][0].isStretch;
                 }
               }
             }
@@ -109,13 +104,7 @@ export default {
     // 监听路由，激活路由指定菜单
     $route: {
       handler: function(val) {
-        for (let i = 0; i < this.mainTitles.length; i++) {
-          if (val.path.indexOf(this.mainTitles[i]) > 0) {
-            setTimeout(() => {
-              this.showItems(this.mainTitles[i]);
-            }, 0);
-          }
-        }
+        this.activeMenu(val);
       },
       immediate: true
     }
@@ -124,17 +113,15 @@ export default {
 </script>
 
 <style scoped>
-h1 {
-  font-size: 10px;
-}
-.mainmenu {
+.leftAside-mainmenu {
   box-sizing: border-box;
   overflow: hidden;
   transition: height 0.15s ease-in-out;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   color: rgba(255, 255, 255, 0.8);
+  user-select: none;
 }
-.mainmenu-title {
+.leftAside-mainmenu > .mainmenu-title {
   width: 100%;
   cursor: pointer;
   height: 60px;
@@ -143,46 +130,48 @@ h1 {
   box-sizing: border-box;
 }
 
-.mainmenu-title .left {
+.leftAside-mainmenu > .mainmenu-title > .left {
   float: left;
 }
-.mainmenu-title .right {
+.leftAside-mainmenu > .mainmenu-title > .left > span {
+  font-size: 16px;
+  padding-left: 10px;
+}
+.leftAside-mainmenu > .mainmenu-title > .left i {
+  font-size: 16px;
+}
+.leftAside-mainmenu > .mainmenu-title > .right {
   float: right;
 }
 
-.mainmenu-title .left span i {
-  font-size: 22px;
-}
-
-.mainmenu-title .left span {
-  font-size: 20px;
-  padding-left: 10px;
-}
-
-.mainmenu-title .arrow {
+.leftAside-mainmenu > .mainmenu-title > .right > .arrow {
   display: inline-block;
-  font-size: 14px;
+  font-size: 12px;
   color: #1de0f2;
   transform: rotate(0deg);
   transition: transform 0.15s ease-in-out;
 }
-.menu-items-container {
+.leftAside-mainmenu > .mainmenu-item-wrap {
   width: 100%;
   box-sizing: border-box;
   overflow: hidden;
   background-color: rgb(7, 58, 96);
 }
-.menu-item {
+.leftAside-mainmenu > .mainmenu-item-wrap > .mainmenu-item {
   display: block;
   height: 50px;
   line-height: 50px;
   padding-left: 70px;
   border-left: 3px solid #2be2ee;
   color: rgba(255, 255, 255, 0.8);
-  font-size: 16px;
+  font-size: 14px;
+  cursor: pointer;
 }
 
-.menu-item:hover {
+.leftAside-mainmenu > .mainmenu-item-wrap > .mainmenu-item:hover {
+  background-color: rgb(6, 46, 77);
+}
+.leftAside-mainmenu > .mainmenu-item-wrap > .mainmenu-item.link-active {
   background-color: rgb(6, 46, 77);
 }
 </style>

@@ -1,39 +1,39 @@
 <template>
   <section class="headerRight">
-    <div class="headerRight-item-wrap">
+    <router-link to="/gis-map" class="headerRight-item-wrap">
       <div class="headerRight-item all-center">
         <img :src="require('@/assets/nav-1.png')">
-        <span>一体化实时监测</span>
+        <span>GIS一张图</span>
       </div>
-    </div>
+    </router-link>
 
-    <div class="headerRight-item-wrap">
+    <router-link to="/engin-design" class="headerRight-item-wrap">
       <div class="headerRight-item all-center">
         <img :src="require('@/assets/nav-2.png')">
         <span>工程设计成果</span>
       </div>
-    </div>
+    </router-link>
 
-    <div class="headerRight-item-wrap">
+    <router-link to="/repair-curing" class="headerRight-item-wrap">
       <div class="headerRight-item all-center">
         <img :src="require('@/assets/nav-3.png')">
         <span>维修养护</span>
       </div>
-    </div>
+    </router-link>
 
-    <div class="headerRight-item-wrap">
+    <router-link to="/emergencies" class="headerRight-item-wrap">
       <div class="headerRight-item all-center">
         <img :src="require('@/assets/nav-4.png')">
         <span>突发事件</span>
       </div>
-    </div>
+    </router-link>
 
-    <div class="headerRight-item-wrap">
+    <router-link to="/engineering-info" class="headerRight-item-wrap">
       <div class="headerRight-item all-center">
         <img :src="require('@/assets/nav-5.png')">
-        <span>内网门户</span>
+        <span>工程信息</span>
       </div>
-    </div>
+    </router-link>
 
   </section>
 </template>
@@ -56,13 +56,16 @@ export default {};
   border-right: 1px solid #233049;
 }
 
+.headerRight-item-wrap.link-active {
+  border-bottom: 2px solid #2be2ee;
+}
+
 .headerRight-item-wrap:hover {
   background-color: #0f2b5c;
 }
 
 .headerRight-item-wrap:nth-child(1) {
-  width: 170px;
-  border-bottom: 2px solid #2be2ee;
+  width: 146px;
   border-left: 1px solid #233049;
 }
 
@@ -75,7 +78,7 @@ export default {};
 }
 
 .headerRight-item-wrap:nth-child(1) > .headerRight-item {
-  width: 145px;
+  width: 110px;
 }
 
 .headerRight-item-wrap:nth-child(2) > .headerRight-item {
