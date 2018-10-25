@@ -1,6 +1,6 @@
 <template>
   <section class="designMGT">
-    <section class="designMGT-top">
+    <section class="designMGT-top ignore">
       <div ref="timeSelectGroup" class="timeSelectGroup tb-center">
         <span class="desc">时间选择:</span>
         <date-picker v-model="timeStart" width="180" placeholder="开始时间"></date-picker>
@@ -26,6 +26,9 @@
         </san-button>
       </div>
     </section>
+    <section class="designMGT-center">
+      <san-table :tableTheadData="tableTheadData" :tableTbodyData="tableTbodyData"></san-table>
+    </section>
     <section class="designMGT-bottom"></section>
   </section>
 </template>
@@ -33,6 +36,8 @@
 import SanList from "@/components/Common/SanList";
 import SanSelect from "@/components/Common/SanSelect";
 import SanButton from "@/components/Common/SanButton";
+import SanTable from "@/components/Common/SanTable";
+
 import DatePicker from "vue2-datepicker";
 export default {
   data() {
@@ -42,7 +47,36 @@ export default {
       projectData: ["唐河地下涵", "宿县枢纽", "符离闸", "灵璧枢纽"],
       projectSelectedOne: "请选择项目",
       classData: ["施工图", "设计图纸", "竣工图纸"],
-      classSelectedOne: "请选择类别"
+      classSelectedOne: "请选择类别",
+      tableTheadData: [
+        "项目名称",
+        "所属类别",
+        "文件名",
+        "数量",
+        "上传时间",
+        "上传人",
+        "操作"
+      ],
+      tableTbodyData: [
+        {
+          id: "u1",
+          name: "唐河地下涵",
+          class: "施工图纸",
+          fileName: "唐河地下涵结构图",
+          count: 3,
+          uploadDate: "2018-10-20 12:00",
+          uploadPerson: "张俊"
+        },
+        {
+          id: "u2",
+          name: "唐河地下涵",
+          class: "施工图纸",
+          fileName: "唐河地下涵结构图",
+          count: 3,
+          uploadDate: "2018-10-20 12:00",
+          uploadPerson: "张俊"
+        }
+      ]
     };
   },
   created() {
@@ -122,6 +156,7 @@ export default {
     SanList,
     SanSelect,
     SanButton,
+    SanTable,
     DatePicker
   }
 };
@@ -135,12 +170,16 @@ export default {
   bottom: 0px;
 }
 .designMGT-top {
-  position: absolute;
-  top: 0px;
-  left: 14px;
-  right: 0px;
+  position: relative;
+  width: 100%;
   height: 40px;
+  margin-bottom: 20px;
 }
+
+.designMGT-top.ignore {
+  z-index: 99;
+}
+
 .designMGT-top > .timeSelectGroup {
   display: inline-block;
 }
@@ -174,6 +213,10 @@ export default {
 .designMGT-top > .searchButtonWrap {
   display: inline-block;
   height: 100%;
+}
+.designMGT-center {
+  width: 100%;
+  margin-top: 20px;
 }
 </style>
 

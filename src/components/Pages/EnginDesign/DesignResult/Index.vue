@@ -26,6 +26,7 @@ export default {
   position: relative;
   width: 100%;
   height: 100%;
+  overflow: auto;
 }
 .designResult > .nav-bar-current-wrap {
   height: 46px;

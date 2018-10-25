@@ -2,7 +2,6 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
-
 //#region vuex
 // import Vuex from 'vuex'
 // Vue.use(Vuex)
@@ -18,7 +17,9 @@ import router from './router'
 // })
 //#endregion
 
+//#region 配置加载条
 
+//#endregion
 
 Vue.config.productionTip = false
 

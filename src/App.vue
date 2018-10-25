@@ -1,5 +1,7 @@
 <template>
   <div id="app">
+
+    <vue-topprogress ref="topProgress"></vue-topprogress>
     <!-- height 66px -->
     <section class="header">
       <div class="header-left-wrap tb-center">
@@ -24,13 +26,31 @@
 import HeaderLeft from "@/components/Layout/Header/HeaderLeft";
 import HeaderCenter from "@/components/Layout/Header/HeaderCenter";
 import HeaderRight from "@/components/Layout/Header/HeaderRight";
+import { vueTopprogress } from "vue-top-progress";
 
 export default {
   name: "App",
+  mounted() {
+    this.$refs.topProgress.start();
+    setTimeout(() => {
+      this.$refs.topProgress.done();
+    }, 600);
+  },
+  watch: {
+    $route: {
+      handler: function(val) {
+        this.$refs.topProgress.start();
+        setTimeout(() => {
+          this.$refs.topProgress.done();
+        }, 600);
+      }
+    }
+  },
   components: {
     HeaderLeft,
     HeaderCenter,
-    HeaderRight
+    HeaderRight,
+    vueTopprogress
   }
 };
 </script>

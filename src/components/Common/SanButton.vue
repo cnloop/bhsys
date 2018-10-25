@@ -1,5 +1,5 @@
 <template>
-    <section class="sanButton">
+    <section ref="sanButton" class="sanButton">
         <span>
             <slot name="icon"></slot>
         </span>
@@ -9,7 +9,19 @@
     </section>
 </template>
 <script>
-export default {};
+export default {
+  created() {
+    this.setBgc();
+  },
+  methods: {
+    async setBgc() {
+      await this.$nextTick(() => {
+        if (!this.$attrs.bgc) return;
+        this.$refs.sanButton.style.backgroundColor = this.$attrs.bgc;
+      });
+    }
+  }
+};
 </script>
 <style scoped>
 .sanButton {
@@ -21,6 +33,7 @@ export default {};
   border-radius: 2px;
   cursor: pointer;
   white-space: nowrap;
+  display: inline-block;
 }
 .sanButton > span:nth-child(1) > i {
   font-size: 16px;
