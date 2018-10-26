@@ -80,6 +80,13 @@ p {
   padding: 0;
   margin: 0;
 }
+textarea {
+  padding: 5px 11px;
+  border: 1px solid #ccc;
+}
+textarea::placeholder {
+  color: #ccc;
+}
 a {
   color: #000;
   text-decoration: none;
@@ -117,7 +124,7 @@ td {
 
 @font-face {
   font-family: "iconfont"; /* project id 858289 */
-  src: url("//at.alicdn.com/t/font_858289_d1mu9vgsyel.woff") format("woff");
+  src: url("//at.alicdn.com/t/font_858289_3nacbmf01u3.woff") format("woff");
 }
 
 .iconfont {

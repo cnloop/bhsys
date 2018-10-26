@@ -1,7 +1,7 @@
 <template>
-    <section @click.stop="selecedItem"  :class="{sanAllSelectByChecked:isAll,sanAllSelect:true}">
-        <i class="iconfont" v-show="isAll">&#xe603;</i>
-    </section>
+  <section @click.stop="selecedItem" :class="{sanAllSelectByChecked:isAll,sanAllSelect:true}">
+    <i class="iconfont" v-show="isAll">&#xe603;</i>
+  </section>
 </template>
 <script>
 export default {
@@ -28,7 +28,7 @@ export default {
     selecedItem() {
       this.isAll = !this.isAll;
       if (this.isAll) {
-        this.$emit("update:checkedSets", this.allItem);
+        this.$emit("update:checkedSets", this.allItem.concat());
       } else {
         this.$emit("update:checkedSets", []);
       }
@@ -43,7 +43,8 @@ export default {
   watch: {
     checkedSets: {
       handler: function(newVal, oldVal) {
-        if (this.checkedSets.length == this.tableTbodyData.length) {
+        if (!newVal.length) return (this.isAll = false);
+        if (newVal.length == this.tableTbodyData.length) {
           this.isAll = true;
         } else {
           this.isAll = false;

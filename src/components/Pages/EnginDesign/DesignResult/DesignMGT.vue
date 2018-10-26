@@ -1,42 +1,39 @@
 <template>
   <section class="designMGT">
-    <section class="designMGT-top ignore">
-      <div ref="timeSelectGroup" class="timeSelectGroup tb-center">
-        <span class="desc">时间选择:</span>
-        <date-picker v-model="timeStart" width="180" placeholder="开始时间"></date-picker>
-        <span class="desc">至</span>
-        <date-picker v-model="timeEnd" width="180" placeholder="结束时间"></date-picker>
-      </div>
-      <div ref="projectSelectGroup" class="projectSelectGroup tb-center">
-        <span ref="projectSelectGroupSpan" class="tb-center">项目选择:</span>
-        <san-select ref="projectSelectGroupSelect" class="tb-center" :seletedOneItem.sync="projectSelectedOne" :projectData="projectData"></san-select>
-      </div>
-      <div ref="classSelectGroup" class="classSelectGroup tb-center">
-        <span ref="classSelectGroupSpan" class="tb-center">类别选择:</span>
-        <san-select ref="classSelectGroupSelect" class="tb-center" :seletedOneItem.sync="classSelectedOne" :projectData="classData"></san-select>
-      </div>
-      <div ref="searchButtonWrap" class="searchButtonWrap tb-center">
-        <san-button ref="searchButton" class="tb-center">
-          <i slot="icon" class="iconfont">&#xeef7;</i>查询
-        </san-button>
-      </div>
-      <div ref="uploadButtonWrap" class="uploadButtonWrap tb-center">
-        <san-button ref="uploadButton" class="tb-center">
-          <i slot="icon" class="iconfont">&#xe720;</i>上传
-        </san-button>
-      </div>
+    <section class="designMGT-top">
+      <span>时间选择：</span>
+      <date-picker v-model="timeStart" placeholder="开始时间"></date-picker>
+      <span class="desc">至</span>
+      <date-picker v-model="timeEnd" placeholder="结束时间"></date-picker>
+      <span class="projectSelectText">项目选择:</span>
+      <san-select class="projectSelectedOne" :seletedOneItem.sync="projectSelectedOne" :projectData="projectData"></san-select>
+      <span class="classSelectedText">类别选择:</span>
+      <san-select class="classSelectedOne" :seletedOneItem.sync="classSelectedOne" :projectData="classData"></san-select>
+      <san-button class="seatchBtn">
+        <i slot="icon" class="iconfont">&#xeef7;</i>查询
+      </san-button>
+      <san-button @click.stop.native="addProject" class="addBtn">
+        <i slot="icon" class="iconfont">&#xe602;</i>添加
+      </san-button>
     </section>
     <section class="designMGT-center">
       <san-table :tableTheadData="tableTheadData" :tableTbodyData="tableTbodyData"></san-table>
     </section>
-    <section class="designMGT-bottom"></section>
+    <section class="designMGT-bottom">
+      <div class="designMGT-bottom-wrap tb-center">
+        <paginate :page-count="currentTotal" v-model="currentPage" :page-range="3" :margin-pages="2" :click-handler="paginateCallback" :prev-text="'上一页'" :next-text="'下一页'" :prev-class="'prev-item'" :prev-link-class="'prev-link-item'" :next-class="'next-item'" :next-link-class="'next-link-item'" :container-class="'pagination'" :page-class="'page-item'" :page-link-class="'page-link-item'" :active-class="'active-item'" :disabled-class="'disabled-item'">
+        </paginate>
+      </div>
+    </section>
+    <san-add-item :itemInfo="itemInfo" :isShowItemInfo="isShowItemInfo" @sanAddItemCallBack="sanAddItemCallBack"></san-add-item>
   </section>
 </template>
 <script>
-import SanList from "@/components/Common/SanList";
 import SanSelect from "@/components/Common/SanSelect";
 import SanButton from "@/components/Common/SanButton";
 import SanTable from "@/components/Common/SanTable";
+import SanAddItem from "@/components/Common/SanAddItem";
+import Paginate from "vuejs-paginate";
 
 import DatePicker from "vue2-datepicker";
 export default {
@@ -69,99 +66,107 @@ export default {
         },
         {
           id: "u2",
-          name: "唐河地下涵",
+          name: "宿县闸",
           class: "施工图纸",
-          fileName: "唐河地下涵结构图",
-          count: 3,
-          uploadDate: "2018-10-20 12:00",
+          fileName: "宿县闸施工图",
+          count: 6,
+          uploadDate: "2018-10-20 11:00",
           uploadPerson: "张俊"
+        },
+        {
+          id: "u3",
+          name: "刘卫涵",
+          class: "施工图纸",
+          fileName: "刘卫涵施工图",
+          count: 3,
+          uploadDate: "2018-10-19 16:00",
+          uploadPerson: "李超群"
+        },
+        {
+          id: "u4",
+          name: "大余闸",
+          class: "设计图纸",
+          fileName: "大余闸机构图",
+          count: 6,
+          uploadDate: "2018-10-19 15:20",
+          uploadPerson: "李超群"
+        },
+        {
+          id: "u5",
+          name: "团结涵",
+          class: "设计图纸",
+          fileName: "团结涵结构图",
+          count: 8,
+          uploadDate: "2018-10-19 13:35",
+          uploadPerson: "李超群"
+        },
+        {
+          id: "u6",
+          name: "大郑涵",
+          class: "设计图纸",
+          fileName: "大郑涵结构图",
+          count: 4,
+          uploadDate: "2018-10-18 16:32",
+          uploadPerson: "王梓"
+        },
+        {
+          id: "u7",
+          name: "唐赵涵",
+          class: "竣工图纸",
+          fileName: "唐赵涵竣工图纸",
+          count: 6,
+          uploadDate: "2018-10-17 14:32",
+          uploadPerson: "王梓"
+        },
+        {
+          id: "u8",
+          name: "唐河地下涵",
+          class: "竣工图纸",
+          fileName: "唐河地下涵竣工图纸",
+          count: 11,
+          uploadDate: "2018-10-17 9:32",
+          uploadPerson: "王梓"
+        },
+        {
+          id: "u9",
+          name: "团结涵",
+          class: "竣工图纸",
+          fileName: "团结涵竣工图纸",
+          count: 9,
+          uploadDate: "2018-10-13 9:24",
+          uploadPerson: "李超群"
         }
-      ]
+      ],
+      itemInfo: "",
+      isShowItemInfo: false,
+      currentPage: 1,
+      currentTotal: 3
     };
   },
-  created() {
-    this.autoSetLayout();
-  },
   methods: {
-    async autoSetLayout() {
-      await this.$nextTick(() => {
-        var timeSelectGroupWidth = this.$refs.timeSelectGroup.offsetWidth;
-        var projectSelectGroupWidth = this.getProjectSelectGroupWidth();
-        this.$refs.projectSelectGroup.style.left = `${timeSelectGroupWidth +
-          34}px`;
-        this.$refs.projectSelectGroup.style.width = `${projectSelectGroupWidth}px`;
-        this.$refs.classSelectGroup.style.left = `${parseInt(
-          this.$refs.projectSelectGroup.style.width.split("px")[0]
-        ) +
-          parseInt(this.$refs.projectSelectGroup.style.left.split("px")[0]) +
-          34}px`;
-        this.$refs.classSelectGroup.style.width = `${this.getClassSelectGroupWidth()}px`;
-        this.setSearchButtonWrap();
-        this.setUploadButtonWrap();
-      });
+    sanAddItemCallBack(info) {
+      if (info === "cancel") {
+        this.isShowItemInfo = false;
+      } else {
+        this.isShowItemInfo = true;
+      }
     },
-    getProjectSelectGroupWidth() {
-      // span 宽
-      var projectSelectGroupSpanWidth = this.$refs.projectSelectGroupSpan
-        .offsetWidth;
-      // select 组件宽
-      var projectSelectGroupSelectWidth = this.$refs.projectSelectGroupSelect
-        .$el.offsetWidth;
-      this.$refs.projectSelectGroupSelect.$el.style.left = `${projectSelectGroupSpanWidth +
-        20}px`;
-
-      return projectSelectGroupSpanWidth + projectSelectGroupSelectWidth + 20;
+    addProject() {
+      this.isShowItemInfo = true;
     },
-    getClassSelectGroupWidth() {
-      // span 宽
-      var classSelectGroupSpanWidth = this.$refs.classSelectGroupSpan
-        .offsetWidth;
-      // select 组件宽
-      var classSelectGroupSelectWidth = this.$refs.classSelectGroupSelect.$el
-        .offsetWidth;
-      this.$refs.classSelectGroupSelect.$el.style.left = `${classSelectGroupSpanWidth +
-        20}px`;
-      return classSelectGroupSpanWidth + classSelectGroupSelectWidth + 20;
-    },
-    setSearchButtonWrap() {
-      var previousEleWidth = this.$refs.classSelectGroup.style.width.split(
-        "px"
-      )[0];
-      var previousEleHeight = this.$refs.classSelectGroup.style.left.split(
-        "px"
-      )[0];
-      this.$refs.searchButtonWrap.style.left = `${parseInt(previousEleWidth) +
-        parseInt(previousEleHeight) +
-        34}px`;
-      this.$refs.searchButtonWrap.style.width = `${
-        this.$refs.searchButton.$el.offsetWidth
-      }px`;
-    },
-    setUploadButtonWrap() {
-      var previousEleWidth = this.$refs.searchButtonWrap.style.width.split(
-        "px"
-      )[0];
-      var previousEleHeight = this.$refs.searchButtonWrap.style.left.split(
-        "px"
-      )[0];
-      this.$refs.uploadButtonWrap.style.left = `${parseInt(previousEleWidth) +
-        parseInt(previousEleHeight) +
-        34}px`;
-      this.$refs.uploadButtonWrap.style.width = `${
-        this.$refs.uploadButton.$el.offsetWidth
-      }px`;
-    }
+    paginateCallback() {}
   },
   components: {
-    SanList,
     SanSelect,
     SanButton,
     SanTable,
-    DatePicker
+    DatePicker,
+    SanAddItem,
+    Paginate
   }
 };
 </script>
-<style scoped>
+<style>
 .designMGT {
   position: absolute;
   left: 0px;
@@ -172,51 +177,116 @@ export default {
 .designMGT-top {
   position: relative;
   width: 100%;
-  height: 40px;
-  margin-bottom: 20px;
-}
-
-.designMGT-top.ignore {
-  z-index: 99;
-}
-
-.designMGT-top > .timeSelectGroup {
-  display: inline-block;
-}
-
-.designMGT-top > .timeSelectGroup > span {
   font-size: 12px;
   color: #7f7f7f;
-  padding: 0px 14px;
+  box-sizing: border-box;
 }
-.designMGT-top > .timeSelectGroup > span:nth-child(1) {
-  padding-left: 0px;
+.designMGT-top .mx-datepicker {
+  width: 180px;
+  padding: 0px 8px;
+}
+.designMGT-top .mx-input {
+  height: 32px;
+  font-size: 12px;
+}
+.designMGT-top .projectSelectText {
+  padding-left: 20px;
+  padding-right: 8px;
+}
+.designMGT-top .projectSelectedOne {
+  vertical-align: middle;
+}
+.designMGT-top .classSelectedText {
+  padding-left: 20px;
+  padding-right: 8px;
+}
+.designMGT-top .classSelectedOne {
+  vertical-align: middle;
+}
+.designMGT-top .seatchBtn {
+  vertical-align: middle;
+  margin: 0px 20px;
+}
+.designMGT-top .addBtn {
+  vertical-align: middle;
 }
 
-.designMGT-top > .projectSelectGroup {
-  display: inline-block;
-  height: 100%;
-}
-.designMGT-top > .projectSelectGroup > span {
-  font-size: 12px;
-  color: #7f7f7f;
-}
-
-.designMGT-top > .classSelectGroup {
-  display: inline-block;
-  height: 100%;
-}
-.designMGT-top > .classSelectGroup > span {
-  font-size: 12px;
-  color: #7f7f7f;
-}
-.designMGT-top > .searchButtonWrap {
-  display: inline-block;
-  height: 100%;
-}
 .designMGT-center {
   width: 100%;
   margin-top: 20px;
+}
+.designMGT-bottom {
+  position: relative;
+  height: 100px;
+}
+.designMGT-bottom-wrap {
+  right: 0px;
+}
+
+.designMGT-bottom-wrap .page-item {
+  float: left;
+  width: 60px;
+  height: 40px;
+  line-height: 40px;
+  box-sizing: content-box;
+}
+
+.designMGT-bottom-wrap .page-link-item {
+  height: 100%;
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  border: 1px solid #8fb3d0;
+  border-right: none;
+  color: #a9a1a1;
+}
+
+.designMGT-bottom-wrap .prev-item {
+  float: left;
+  height: 40px;
+  line-height: 40px;
+}
+.designMGT-bottom-wrap .prev-link-item {
+  height: 100%;
+  display: inline-block;
+  padding: 0 10px;
+  text-align: center;
+  border: 1px solid #8fb3d0;
+  color: #a9a1a1;
+  border-right: none;
+}
+.designMGT-bottom-wrap .next-item {
+  display: inline-block;
+  height: 40px;
+  line-height: 40px;
+}
+.designMGT-bottom-wrap .next-link-item {
+  height: 100%;
+  display: inline-block;
+  padding: 0 10px;
+  text-align: center;
+  color: #a9a1a1;
+  border: 1px solid #8fb3d0;
+}
+
+.designMGT-bottom-wrap .active-item > .page-link-item {
+  color: #fff !important;
+  background-color: #2666e8;
+}
+.designMGT-bottom-wrap .active-item > .page-link-item {
+  /* color: #337ab7; */
+  color: red;
+}
+.designMGT-bottom-wrap .disabled-item {
+  cursor: not-allowed;
+}
+.designMGT-bottom-wrap .disabled-item > .prev-link-item {
+  color: #ddd;
+  cursor: not-allowed;
+}
+.designMGT-bottom-wrap .disabled-item > .next-link-item {
+  color: #ddd;
+  cursor: not-allowed;
 }
 </style>
 

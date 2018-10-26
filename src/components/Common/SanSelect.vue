@@ -1,5 +1,5 @@
 <template>
-  <section v-selectItem class="sanSelect">
+  <section ref="sanSelect" v-selectItem class="sanSelect">
     <span>{{seletedOneItem}}</span>
     <i class="iconfont" ref="iconArrow">&#xe600;</i>
     <div class="DropDownMenu" v-show="isSelected">
@@ -94,7 +94,8 @@ export default {
   position: absolute;
   top: 34px;
   left: 0px;
-  min-width: 134px;
+  width: 100%;
+  z-index: 999;
   box-sizing: border-box;
   background-color: #fff;
   box-shadow: 0px 1px 5px 0px #ccc;

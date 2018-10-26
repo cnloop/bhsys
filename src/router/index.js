@@ -75,12 +75,14 @@ const designResult = {
 
 const designSetUp = {
   path: "design-setUp",
+  meta: "成果分类设置",
   component: DesignSetUp,
   children: [{
     path: "",
     redirect: "class-setUp"
   }, {
     path: "class-setUp",
+    meta: "成果分类设置",
     component: ClassSetUp
   }]
 }

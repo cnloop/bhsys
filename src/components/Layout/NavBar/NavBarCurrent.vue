@@ -3,7 +3,7 @@
     <div class="navBarCurrent-wrap tb-center">
       <span>当前位置：</span>
       <span>首页</span>
-      <span v-for="position in positionArr" :key="position">
+      <span v-for="(position,index) in positionArr" :key="index">
         <span class="arrow">></span>
         <span>{{position}}</span>
       </span>
