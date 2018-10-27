@@ -1,40 +1,40 @@
 <template>
-  <section class="classSetUp">
-    <section class="classSetUp-top">
-      <span>时间选择：</span>
-      <date-picker v-model="timeStart" placeholder="开始时间"></date-picker>
-      <span class="desc">至</span>
-      <date-picker v-model="timeEnd" placeholder="结束时间"></date-picker>
-      <span class="classSelectedText">类别选择:</span>
-      <san-select class="classSelectedOne" :seletedOneItem.sync="classSelectedOne" :projectData="classData"></san-select>
-      <san-button class="seatchBtn">
-        <i slot="icon" class="iconfont">&#xeef7;</i>查询
-      </san-button>
-      <san-button @click.stop.native="addClass" class="addBtn">
-        <i slot="icon" class="iconfont">&#xe602;</i>添加
-      </san-button>
+    <section class="manageProject">
+        <section class="manageProject-top">
+            <span>时间选择：</span>
+            <date-picker v-model="timeStart" placeholder="开始时间"></date-picker>
+            <span class="desc">至</span>
+            <date-picker v-model="timeEnd" placeholder="结束时间"></date-picker>
+            <span class="classSelectedText">类别选择:</span>
+            <san-select class="classSelectedOne" :seletedOneItem.sync="classSelectedOne" :projectData="classData"></san-select>
+            <san-button class="seatchBtn">
+                <i slot="icon" class="iconfont">&#xeef7;</i>查询
+            </san-button>
+            <san-button @click.stop.native="addClass" class="addBtn">
+                <i slot="icon" class="iconfont">&#xe602;</i>添加
+            </san-button>
+        </section>
+        <section class="manageProject-center">
+            <san-class-set-up-table :tableTheadData="tableTheadData" :tableTbodyData="tableTbodyData"></san-class-set-up-table>
+        </section>
+        <section class="manageProject-bottom">
+            <div class="manageProject-bottom-wrap tb-center">
+                <paginate :page-count="currentTotal" v-model="currentPage" :page-range="3" :margin-pages="2" :click-handler="paginateCallback" :prev-text="'上一页'" :next-text="'下一页'" :prev-class="'prev-item'" :prev-link-class="'prev-link-item'" :next-class="'next-item'" :next-link-class="'next-link-item'" :container-class="'pagination'" :page-class="'page-item'" :page-link-class="'page-link-item'" :active-class="'active-item'" :disabled-class="'disabled-item'">
+                </paginate>
+            </div>
+        </section>
+        <san-class-set-up-add-item :itemInfo="itemInfo" :isShowItemInfo="isShowItemInfo" @sanAddItemCallBack="sanAddItemCallBack"></san-class-set-up-add-item>
     </section>
-    <section class="classSetUp-center">
-      <san-class-set-up-table :tableTheadData="tableTheadData" :tableTbodyData="tableTbodyData"></san-class-set-up-table>
-    </section>
-    <section class="classSetUp-bottom">
-      <div class="classSetUp-bottom-wrap tb-center">
-        <paginate :page-count="currentTotal" v-model="currentPage" :page-range="3" :margin-pages="2" :click-handler="paginateCallback" :prev-text="'上一页'" :next-text="'下一页'" :prev-class="'prev-item'" :prev-link-class="'prev-link-item'" :next-class="'next-item'" :next-link-class="'next-link-item'" :container-class="'pagination'" :page-class="'page-item'" :page-link-class="'page-link-item'" :active-class="'active-item'" :disabled-class="'disabled-item'">
-        </paginate>
-      </div>
-    </section>
-    <san-class-set-up-add-item :itemInfo="itemInfo" :isShowItemInfo="isShowItemInfo" @sanAddItemCallBack="sanAddItemCallBack"></san-class-set-up-add-item>
-  </section>
 </template>
 <script>
 import SanSelect from "@/components/Common/SanSelect";
 import SanButton from "@/components/Common/SanButton";
+import SanTable from "@/components/Common/SanTable";
 import SanClassSetUpTable from "@/components/ItemCom/EnginDesign/SanClassSetUpTable";
 
 import SanClassSetUpAddItem from "@/components/ItemCom/EnginDesign/SanClassSetUpAddItem";
 import Paginate from "vuejs-paginate";
 import DatePicker from "vue2-datepicker";
-
 export default {
   data() {
     return {
@@ -130,6 +130,7 @@ export default {
   components: {
     SanSelect,
     SanButton,
+    SanTable,
     DatePicker,
     Paginate,
     SanClassSetUpTable,
@@ -138,57 +139,56 @@ export default {
 };
 </script>
 <style>
-.classSetUp {
+.manageProject {
   position: absolute;
   left: 0px;
   right: 0px;
   top: 0px;
   bottom: 0px;
 }
-.classSetUp-top {
+.manageProject-top {
   position: relative;
   width: 100%;
   font-size: 12px;
   color: #7f7f7f;
   box-sizing: border-box;
 }
-.classSetUp-top .mx-datepicker {
+.manageProject-top .mx-datepicker {
   width: 180px;
   padding: 0px 8px;
 }
-.classSetUp-top .mx-input {
+.manageProject-top .mx-input {
   height: 32px;
   font-size: 12px;
 }
-.classSetUp-top .classSelectedText {
+.manageProject-top .classSelectedText {
   padding-left: 20px;
   padding-right: 8px;
 }
-.classSetUp-top .classSelectedOne {
+.manageProject-top .classSelectedOne {
   vertical-align: middle;
 }
-.classSetUp-top .seatchBtn {
+.manageProject-top .seatchBtn {
   vertical-align: middle;
   margin: 0px 20px;
 }
-.classSetUp-top .addBtn {
+.manageProject-top .addBtn {
   vertical-align: middle;
 }
 
-.classSetUp-center {
+.manageProject-center {
   width: 100%;
   margin-top: 20px;
 }
-
-.classSetUp-bottom {
+.manageProject-bottom {
   position: relative;
   height: 100px;
 }
-.classSetUp-bottom-wrap {
+.manageProject-bottom-wrap {
   right: 0px;
 }
 
-.classSetUp-bottom-wrap .page-item {
+.manageProject-bottom-wrap .page-item {
   float: left;
   width: 60px;
   height: 40px;
@@ -196,7 +196,7 @@ export default {
   box-sizing: content-box;
 }
 
-.classSetUp-bottom-wrap .page-link-item {
+.manageProject-bottom-wrap .page-link-item {
   height: 100%;
   display: inline-block;
   width: 100%;
@@ -206,12 +206,12 @@ export default {
   color: #a9a1a1;
 }
 
-.classSetUp-bottom-wrap .prev-item {
+.manageProject-bottom-wrap .prev-item {
   float: left;
   height: 40px;
   line-height: 40px;
 }
-.classSetUp-bottom-wrap .prev-link-item {
+.manageProject-bottom-wrap .prev-link-item {
   height: 100%;
   display: inline-block;
   padding: 0 10px;
@@ -220,12 +220,12 @@ export default {
   color: #a9a1a1;
   border-right: none;
 }
-.classSetUp-bottom-wrap .next-item {
+.manageProject-bottom-wrap .next-item {
   display: inline-block;
   height: 40px;
   line-height: 40px;
 }
-.classSetUp-bottom-wrap .next-link-item {
+.manageProject-bottom-wrap .next-link-item {
   height: 100%;
   display: inline-block;
   padding: 0 10px;
@@ -234,34 +234,34 @@ export default {
   border: 1px solid #8fb3d0;
 }
 
-.classSetUp-bottom-wrap .active-item > .page-link-item {
+.manageProject-bottom-wrap .active-item > .page-link-item {
   color: #fff !important;
   background-color: #2666e8;
 }
-.classSetUp-bottom-wrap .active-item > .page-link-item {
+.manageProject-bottom-wrap .active-item > .page-link-item {
   /* color: #337ab7; */
   color: red;
 }
-.classSetUp-bottom-wrap .disabled-item {
+.manageProject-bottom-wrap .disabled-item {
   cursor: not-allowed;
 }
-.classSetUp-bottom-wrap .disabled-item > .prev-link-item {
+.manageProject-bottom-wrap .disabled-item > .prev-link-item {
   color: #ddd;
   cursor: not-allowed;
 }
-.classSetUp-bottom-wrap .disabled-item > .next-link-item {
+.manageProject-bottom-wrap .disabled-item > .next-link-item {
   color: #ddd;
   cursor: not-allowed;
 }
-.classSetUp-bottom {
+.manageProject-bottom {
   position: relative;
   height: 100px;
 }
-.classSetUp-bottom-wrap {
+.manageProject-bottom-wrap {
   right: 0px;
 }
 
-.classSetUp-bottom-wrap .page-item {
+.manageProject-bottom-wrap .page-item {
   float: left;
   width: 60px;
   height: 40px;
@@ -269,7 +269,7 @@ export default {
   box-sizing: content-box;
 }
 
-.classSetUp-bottom-wrap .page-link-item {
+.manageProject-bottom-wrap .page-link-item {
   height: 100%;
   display: inline-block;
   width: 100%;
@@ -279,12 +279,12 @@ export default {
   color: #a9a1a1;
 }
 
-.classSetUp-bottom-wrap .prev-item {
+.manageProject-bottom-wrap .prev-item {
   float: left;
   height: 40px;
   line-height: 40px;
 }
-.classSetUp-bottom-wrap .prev-link-item {
+.manageProject-bottom-wrap .prev-link-item {
   height: 100%;
   display: inline-block;
   padding: 0 10px;
@@ -293,12 +293,12 @@ export default {
   color: #a9a1a1;
   border-right: none;
 }
-.classSetUp-bottom-wrap .next-item {
+.manageProject-bottom-wrap .next-item {
   display: inline-block;
   height: 40px;
   line-height: 40px;
 }
-.classSetUp-bottom-wrap .next-link-item {
+.manageProject-bottom-wrap .next-link-item {
   height: 100%;
   display: inline-block;
   padding: 0 10px;
@@ -307,23 +307,24 @@ export default {
   border: 1px solid #8fb3d0;
 }
 
-.classSetUp-bottom-wrap .active-item > .page-link-item {
+.manageProject-bottom-wrap .active-item > .page-link-item {
   color: #fff !important;
   background-color: #2666e8;
 }
-.classSetUp-bottom-wrap .active-item > .page-link-item {
+.manageProject-bottom-wrap .active-item > .page-link-item {
   /* color: #337ab7; */
   color: red;
 }
-.classSetUp-bottom-wrap .disabled-item {
+.manageProject-bottom-wrap .disabled-item {
   cursor: not-allowed;
 }
-.classSetUp-bottom-wrap .disabled-item > .prev-link-item {
+.manageProject-bottom-wrap .disabled-item > .prev-link-item {
   color: #ddd;
   cursor: not-allowed;
 }
-.classSetUp-bottom-wrap .disabled-item > .next-link-item {
+.manageProject-bottom-wrap .disabled-item > .next-link-item {
   color: #ddd;
   cursor: not-allowed;
 }
 </style>
+

@@ -46,10 +46,12 @@ export default {
   height: 100%;
   outline: none;
   padding: 0 15px;
+  font-size: 14px;
   transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 .sanInput input::placeholder {
   color: #ccc;
+  font-size: 1px;
 }
 .sanInput input:focus {
   border: 1px solid rgb(64, 158, 255);
