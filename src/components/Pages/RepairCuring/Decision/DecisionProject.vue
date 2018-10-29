@@ -16,7 +16,6 @@
     </section>
     <section class="decisionProject-center">
       <decision-table :tableTheadData="tableTheadData" :tableTbodyData="tableTbodyData"></decision-table>
-      <san-class-set-up-table></san-class-set-up-table>
     </section>
     <section class="decisionProject-bottom">
       <div class="decisionProject-bottom-wrap tb-center">
@@ -30,9 +29,7 @@
 <script>
 import SanSelect from "@/components/Common/SanSelect";
 import SanButton from "@/components/Common/SanButton";
-
 import DecisionTable from "@/components/ItemCom/RepairCuring/DecisionTable";
-
 import SanClassSetUpAddItem from "@/components/ItemCom/EnginDesign/SanClassSetUpAddItem";
 import Paginate from "vuejs-paginate";
 import DatePicker from "vue2-datepicker";

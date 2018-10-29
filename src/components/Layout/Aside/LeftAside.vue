@@ -4,7 +4,7 @@
       <div class="mainmenu-title">
         <div class="left">
           <span>
-            <i class="iconfont">&#xe621;</i>
+            <i v-html="item.title.icon" class="iconfont"></i>
           </span>
           <span>{{item.title.text}}</span>
         </div>
@@ -49,7 +49,7 @@ export default {
           }, 0);
         }
       }
-    },
+    }
   },
   directives: {
     showMenuItems: {

@@ -16,7 +16,7 @@ export default {
       navData: [
         {
           title: {
-            icon: "&#xe621;",
+            icon: "&#xe614;",
             text: "系统设置"
           },
           routerText: "system-set",
@@ -50,7 +50,7 @@ export default {
         },
         {
           title: {
-            icon: "&#xe621;",
+            icon: "&#xe606;",
             text: "机构用户"
           },
           routerText: "org-set",
@@ -72,7 +72,7 @@ export default {
         },
         {
           title: {
-            icon: "&#xe621;",
+            icon: "&#xe618;",
             text: "数据监测"
           },
           routerText: "data-set",
@@ -86,7 +86,7 @@ export default {
         },
         {
           title: {
-            icon: "&#xe621;",
+            icon: "&#xe60f;",
             text: "工程管理"
           },
           routerText: "project-set",
@@ -100,7 +100,7 @@ export default {
         },
         {
           title: {
-            icon: "&#xe621;",
+            icon: "&#xe6fd;",
             text: "视频管理"
           },
           routerText: "video-set",
@@ -114,7 +114,7 @@ export default {
         },
         {
           title: {
-            icon: "&#xe621;",
+            icon: "&#xe615;",
             text: "流程管理"
           },
           routerText: "path-set",
@@ -132,7 +132,7 @@ export default {
         },
         {
           title: {
-            icon: "&#xe621;",
+            icon: "&#xe607;",
             text: "日志查询"
           },
           routerText: "log-set",

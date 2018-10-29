@@ -16,7 +16,7 @@ export default {
       navData: [
         {
           title: {
-            icon: "&#xe621;",
+            icon: "&#xeb68;",
             text: "标准化模型"
           },
           routerText: "model",
@@ -30,7 +30,7 @@ export default {
         },
         {
           title: {
-            icon: "&#xe621;",
+            icon: "&#xebb7;",
             text: "维护方案及预算"
           },
           routerText: "budget",
@@ -44,7 +44,7 @@ export default {
         },
         {
           title: {
-            icon: "&#xe621;",
+            icon: "&#xec37;",
             text: "重大工程辅助决策"
           },
           routerText: "decision",
@@ -58,7 +58,7 @@ export default {
         },
         {
           title: {
-            icon: "&#xe621;",
+            icon: "&#xeb64;",
             text: "维护过程实时记录"
           },
           routerText: "progress",
@@ -72,7 +72,7 @@ export default {
         },
         {
           title: {
-            icon: "&#xe621;",
+            icon: "&#xeb67;",
             text: "工程维护验收"
           },
           routerText: "check",
@@ -86,7 +86,7 @@ export default {
         },
         {
           title: {
-            icon: "&#xe621;",
+            icon: "&#xeb88;",
             text: "文档资料归档"
           },
           routerText: "doc",

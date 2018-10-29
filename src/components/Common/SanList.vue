@@ -1,27 +1,15 @@
 <template>
-    <section class="sanList">
-        <div class="title">
-            <span>设备类型</span>
-            <i class="iconfont">&#xe601;</i>
-        </div>
-        <ul class="info">
-            <li>
-                <span>主电机</span>
-            </li>
-            <li>
-                <span>主电机</span>
-            </li>
-            <li>
-                <span>主电机</span>
-            </li>
-            <li>
-                <span>主电机</span>
-            </li>
-            <li>
-                <span>主电机</span>
-            </li>
-        </ul>
-    </section>
+  <section class="sanList">
+    <div class="title">
+      <span>{{$attrs.title}}</span>
+      <i class="iconfont">&#xe601;</i>
+    </div>
+    <ul class="info">
+      <li v-for="(item,index) in $attrs.listArr" :key="index">
+        <span>{{item}}</span>
+      </li>
+    </ul>
+  </section>
 </template>
 <script>
 export default {};
@@ -31,6 +19,7 @@ export default {};
   width: 100%;
   height: 100%;
   box-sizing: border-box;
+  background-color: #fff;
 }
 
 .sanList .title {

@@ -17,7 +17,7 @@ export default {
       navData: [
         {
           title: {
-            icon: "&#xe621;",
+            icon: "&#xeb61;",
             text: "设计成果"
           },
           items: [
@@ -35,7 +35,7 @@ export default {
         },
         {
           title: {
-            icon: "&#xe621;",
+            icon: "&#xeb66;",
             text: "成果分类设置"
           },
           items: [

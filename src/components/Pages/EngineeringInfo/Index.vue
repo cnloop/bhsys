@@ -16,7 +16,7 @@ export default {
       navData: [
         {
           title: {
-            icon: "&#xe621;",
+            icon: "&#xeb8f;",
             text: "工程基础信息"
           },
           routerText: "base",
@@ -30,7 +30,7 @@ export default {
         },
         {
           title: {
-            icon: "&#xe621;",
+            icon: "&#xebb8;",
             text: "运行维护信息"
           },
           routerText: "run",
@@ -44,7 +44,7 @@ export default {
         },
         {
           title: {
-            icon: "&#xe621;",
+            icon: "&#xec56;",
             text: "工程附属设施"
           },
           routerText: "other",
@@ -58,7 +58,7 @@ export default {
         },
         {
           title: {
-            icon: "&#xe621;",
+            icon: "&#xeb95;",
             text: "运行维护管理报表"
           },
           routerText: "table",

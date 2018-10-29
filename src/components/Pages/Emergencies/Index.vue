@@ -16,7 +16,7 @@ export default {
       navData: [
         {
           title: {
-            icon: "&#xe621;",
+            icon: "&#xeb92;",
             text: "预案管理编制"
           },
           routerText: "manage",
@@ -30,7 +30,7 @@ export default {
         },
         {
           title: {
-            icon: "&#xe621;",
+            icon: "&#xec6b;",
             text: "方案制定"
           },
           routerText: "make",
@@ -44,7 +44,7 @@ export default {
         },
         {
           title: {
-            icon: "&#xe621;",
+            icon: "&#xeb62;",
             text: "方案实施计划"
           },
           routerText: "start",
@@ -58,7 +58,7 @@ export default {
         },
         {
           title: {
-            icon: "&#xe621;",
+            icon: "&#xebd8;",
             text: "实施情况记录"
           },
           routerText: "note",
@@ -72,7 +72,7 @@ export default {
         },
         {
           title: {
-            icon: "&#xe621;",
+            icon: "&#xec24;",
             text: "文档资料"
           },
           routerText: "doc",
