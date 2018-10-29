@@ -15,7 +15,8 @@
       </san-button>
     </section>
     <section class="checkProject-center">
-      <check-table :tableTheadData="tableTheadData" :tableTbodyData="tableTbodyData"></check-table>
+      <img :src="require('@/assets/check.jpg')" alt="">
+      <!-- <check-table :tableTheadData="tableTheadData" :tableTbodyData="tableTbodyData"></check-table> -->
     </section>
     <section class="checkProject-bottom">
       <div class="checkProject-bottom-wrap tb-center">
@@ -179,6 +180,9 @@ export default {
 .checkProject-center {
   width: 100%;
   margin-top: 20px;
+}
+.checkProject-center > img {
+  width: 100%;
 }
 .checkProject-bottom {
   position: relative;

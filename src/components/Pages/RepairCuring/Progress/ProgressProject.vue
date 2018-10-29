@@ -15,7 +15,8 @@
       </san-button>
     </section>
     <section class="progressProject-center">
-      <progress-table :tableTheadData="tableTheadData" :tableTbodyData="tableTbodyData"></progress-table>
+      <!-- <progress-table :tableTheadData="tableTheadData" :tableTbodyData="tableTbodyData"></progress-table> -->
+      <img :src="require('@/assets/progress.png')" alt="">
     </section>
     <section class="progressProject-bottom">
       <div class="progressProject-bottom-wrap tb-center">
@@ -32,7 +33,6 @@ import SanButton from "@/components/Common/SanButton";
 import SanTable from "@/components/Common/SanTable";
 
 import ProgressTable from "@/components/ItemCom/RepairCuring/ProgressTable";
-
 
 import SanClassSetUpAddItem from "@/components/ItemCom/EnginDesign/SanClassSetUpAddItem";
 import Paginate from "vuejs-paginate";
@@ -208,6 +208,10 @@ export default {
   width: 100%;
   margin-top: 20px;
 }
+.progressProject-center > img {
+  width: 100%;
+}
+
 .progressProject-bottom {
   position: relative;
   height: 100px;

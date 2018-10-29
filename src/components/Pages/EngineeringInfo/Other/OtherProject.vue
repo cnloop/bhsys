@@ -1,6 +1,7 @@
 <template>
-    <section class="otherProject">
-        <section class="otherProject-top">
+  <section class="otherProject">
+    <img :src="require('@/assets/machine.png')" alt="">
+    <!-- <section class="otherProject-top">
             <span>时间选择：</span>
             <date-picker v-model="timeStart" placeholder="开始时间"></date-picker>
             <span class="desc">至</span>
@@ -23,8 +24,8 @@
                 </paginate>
             </div>
         </section>
-        <san-class-set-up-add-item :itemInfo="itemInfo" :isShowItemInfo="isShowItemInfo" @sanAddItemCallBack="sanAddItemCallBack"></san-class-set-up-add-item>
-    </section>
+        <san-class-set-up-add-item :itemInfo="itemInfo" :isShowItemInfo="isShowItemInfo" @sanAddItemCallBack="sanAddItemCallBack"></san-class-set-up-add-item> -->
+  </section>
 </template>
 <script>
 import SanSelect from "@/components/Common/SanSelect";
@@ -325,5 +326,9 @@ export default {
 .otherProject-bottom-wrap .disabled-item > .next-link-item {
   color: #ddd;
   cursor: not-allowed;
+}
+
+.otherProject > img {
+  width: 100%;
 }
 </style>
