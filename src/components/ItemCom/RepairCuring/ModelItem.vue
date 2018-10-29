@@ -1,81 +1,81 @@
 <template>
-    <section class="sanAddItem" v-show="isShowItemInfo">
-        <div class="sanAddItem-box">
+    <section class="sanItemInfo" v-show="isShowItemInfo">
+        <div class="sanItemInfo-box">
             <!-- <san-input></san-input> -->
-            <div class="sanAddItem-box-header">
-                <span>项目信息</span>
+            <div class="sanItemInfo-box-header">
+                <span>查看模型信息</span>
                 <i @click.stop="clickBox('cancel')" class="iconfont">&#xe622;</i>
             </div>
-            <div class="sanAddItem-box-center">
+            <div class="sanItemInfo-box-center">
                 <table>
                     <tr>
                         <td>
-                            <span>项目名称：</span>
+                            <span>设备类型：</span>
                         </td>
                         <td>
-                            <san-select class="sanSelectProject" :seletedOneItem.sync="projectSelectedOne" :projectData="projectData"></san-select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span>所属类别：</span>
-                        </td>
-                        <td>
-                            <san-select class="sanSelectProjectClass" :seletedOneItem.sync="classSelectedOne" :projectData="classData"></san-select>
+                            <san-input :sanInputDisabled="true" :sanInputValue.sync="className"></san-input>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <span>文件名：</span>
+                            <span>维修级别：</span>
                         </td>
                         <td>
-                            <san-input :sanInputDisabled="false" :sanInputValue.sync="fileName"></san-input>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span>上传文件：</span>
-                        </td>
-                        <td>
-                            <san-input :sanInputDisabled="true" :sanInputValue.sync="uploadFile"></san-input>
+                            <san-input :sanInputDisabled="true" :sanInputValue.sync="grade"></san-input>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <span>文件数量：</span>
+                            <span>工作摘要：</span>
                         </td>
                         <td>
-                            <san-input :sanInputDisabled="false" :sanInputValue.sync="count"></san-input>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span>上传时间：</span>
-                        </td>
-                        <td>
-                            <san-input :sanInputDisabled="false" :sanInputValue.sync="uploadDate"></san-input>
+                            <san-input :sanInputDisabled="true" :sanInputValue.sync="summary"></san-input>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <span>上传人：</span>
+                            <span>工作描述：</span>
                         </td>
                         <td>
-                            <san-input :sanInputDisabled="false" :sanInputValue.sync="uploadPerson"></san-input>
+                            <san-input :sanInputDisabled="true" :sanInputValue.sync="desc"></san-input>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <span>备注：</span>
+                            <span>故障摘要：</span>
                         </td>
                         <td>
-                            <textarea rows="4" cols="35" placeholder="请输入备注信息"></textarea>
+                            <san-input :sanInputDisabled="true" :sanInputValue.sync="trouble"></san-input>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span>故障描述：</span>
+                        </td>
+                        <td>
+                            <san-input :sanInputDisabled="true" :sanInputValue.sync="troubleDesc"></san-input>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span>计划摘要：</span>
+                        </td>
+                        <td>
+                            <san-input :sanInputDisabled="true" :sanInputValue.sync="plan"></san-input>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span>计划描述：</span>
+                        </td>
+                        <td>
+                            <san-input :sanInputDisabled="true" :sanInputValue.sync="planDesc"></san-input>
                         </td>
                     </tr>
                 </table>
             </div>
 
-            <div class="sanAddItem-box-bottom">
+            <div class="sanItemInfo-box-bottom">
                 <san-base-button class="btn" @click.native.stop="clickBox('cancel')">确认</san-base-button>
             </div>
         </div>
@@ -84,60 +84,59 @@
 <script>
 import SanInput from "@/components/Common/SanInput";
 import SanBaseButton from "@/components/Common/SanBaseButton";
-import SanSelect from "@/components/Common/SanSelect";
 
 export default {
   props: ["isShowItemInfo", "itemInfo"],
   data() {
     return {
-      name: "",
-      nClass: "",
-      fileName: "",
-      count: "",
-      uploadFile:"请选择文件",
-      uploadDate: "",
-      uploadPerson: "",
-      projectSelectedOne: "请选择项目",
-      projectData: ["唐河地下涵", "宿县枢纽", "符离闸", "灵璧枢纽"],
-      classData: ["施工图", "设计图纸", "竣工图纸"],
-      classSelectedOne: "请选择类别"
+      class: "",
+      grade: "",
+      summary: "",
+      desc: "",
+      trouble: "",
+      troubleDesc: "",
+      plan: "",
+      planDesc: ""
     };
   },
   created() {
-    this.name = this.itemInfo.name;
-    this.nClass = this.itemInfo.class;
-    this.fileName = this.itemInfo.fileName;
-    this.count = this.itemInfo.count;
-    this.uploadDate = this.itemInfo.uploadDate;
-    this.uploadPerson = this.itemInfo.uploadPerson;
+    this.className = this.itemInfo.className;
+    this.grade = this.itemInfo.grade;
+    this.summary = this.itemInfo.summary;
+    this.desc = this.itemInfo.desc;
+    this.trouble = this.itemInfo.trouble;
+    this.troubleDesc = this.itemInfo.troubleDesc;
+    this.plan = this.itemInfo.plan;
+    this.planDesc = this.itemInfo.planDesc;
   },
   components: {
     SanInput,
-    SanBaseButton,
-    SanSelect
+    SanBaseButton
   },
   methods: {
     clickBox(info) {
-      this.$emit("sanAddItemCallBack", info);
+      this.$emit("sanItemInfoCallBack", info);
       this.$emit("update:isShowItemInfo", !this.isShowItemInfo);
     }
   },
   watch: {
     itemInfo: {
       handler: function(val) {
-        this.name = val.name;
-        this.nClass = val.class;
-        this.fileName = val.fileName;
-        this.count = this.itemInfo.count;
-        this.uploadDate = val.uploadDate;
-        this.uploadPerson = val.uploadPerson;
+        this.className = this.itemInfo.className;
+        this.grade = this.itemInfo.grade;
+        this.summary = this.itemInfo.summary;
+        this.desc = this.itemInfo.desc;
+        this.trouble = this.itemInfo.trouble;
+        this.troubleDesc = this.itemInfo.troubleDesc;
+        this.plan = this.itemInfo.plan;
+        this.planDesc = this.itemInfo.planDesc;
       }
     }
   }
 };
 </script>
 <style scoped>
-.sanAddItem {
+.sanItemInfo {
   position: fixed;
   left: 0;
   right: 0;
@@ -146,7 +145,7 @@ export default {
   background-color: rgba(0, 0, 0, 0.3);
   z-index: 999;
 }
-.sanAddItem-box {
+.sanItemInfo-box {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -162,51 +161,48 @@ export default {
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
-.sanAddItem-box-header {
+.sanItemInfo-box-header {
   color: #303133;
   height: 32px;
   line-height: 32px;
 }
 
-.sanAddItem-box-header > span {
+.sanItemInfo-box-header > span {
   font-size: 18px;
   font-weight: 600;
 }
 
-.sanAddItem-box-header > i {
+.sanItemInfo-box-header > i {
   cursor: pointer;
   float: right;
   font-size: 22px;
   transform: translateY(-4px);
   backface-visibility: hidden;
 }
-.sanAddItem-box-center {
+.sanItemInfo-box-center {
   margin-top: 20px;
   padding-left: 90px;
   padding-right: 90px;
 }
-.sanAddItem-box-center table {
+.sanItemInfo-box-center table {
   width: 100%;
   font-size: 15px;
   white-space: nowrap;
 }
-.sanAddItem-box-center table td {
+.sanItemInfo-box-center table td {
   padding-top: 10px;
   padding-bottom: 10px;
+
+  /* width: 50%;
+    text-align: center; */
 }
-.sanAddItem-box-center table td .sanSelectProject {
-  width: 180px;
-}
-.sanAddItem-box-center table td .sanSelectProjectClass {
-  width: 180px;
-}
-.sanAddItem-box-center table td:nth-child(2) {
+.sanItemInfo-box-center table td:nth-child(2) {
   padding-left: 25px;
 }
-.sanAddItem-box-bottom {
+.sanItemInfo-box-bottom {
   margin-top: 12px;
 }
-.sanAddItem-box-bottom > .btn {
+.sanItemInfo-box-bottom > .btn {
   float: right;
 }
 </style>

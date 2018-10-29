@@ -9,11 +9,20 @@ import GisMap from '@/components/Pages/GisMap'
 Vue.use(Router)
 
 
-// 首页
+// 首页 (登陆页)
 const home = {
   path: "/",
-  redirect: "/gis-map"
+  redirect: "/login"
 }
+
+//#region 登陆页
+import Login from "@/components/Pages/Login"
+const login = {
+  path: "/login",
+  name: "Login",
+  component: Login
+}
+//#endregion
 
 
 // GIS一张图
@@ -359,14 +368,14 @@ const other = {
 
 const table = {
   path: "table",
-  meta: "工程附属设施",
+  meta: "运行维护管理报表",
   component: Table,
   children: [{
     path: "/",
     redirect: "table-project"
   }, {
     path: "table-project",
-    meta: "工程附属设施",
+    meta: "运行维护管理报表",
     component: TableProject
   }]
 }
@@ -382,13 +391,52 @@ const engineeringInfo = {
 //#endregion
 
 
+
+
+//#region 系统管理
+import SystemManage from "@/components/Pages/SystemManage"
+import SystemSet from "@/components/Pages/SystemManage/SystemSet"
+import MenuSystemSet from "@/components/Pages/SystemManage/SystemSet/Menu"
+import RoleSystemSet from "@/components/Pages/SystemManage/SystemSet/Role"
+
+
+const systemManageIndex = {
+  path: "",
+  redirect: "system-set"
+}
+
+const systemSet = {
+  path: "system-set",
+  meta: "系统设置",
+  component: SystemSet,
+  children: [{
+    path: "/",
+    redirect: "menu"
+  }, {
+    path: "menu",
+    meta: "菜单管理",
+    component: MenuSystemSet
+  }, {
+    path: "role",
+    meta: "角色管理",
+    component: RoleSystemSet
+  }]
+}
+const systemManage = {
+  path: "/system-manage",
+  meta: "系统管理",
+  component: SystemManage,
+  children: [systemManageIndex, systemSet]
+}
+
 // 其他
 const error = {
   path: "*",
   redirect: "/"
 }
 
+
 export default new Router({
   linkActiveClass: "link-active",
-  routes: [home, gisMap, enginDesign, repairCuring, emergencies, engineeringInfo, error]
+  routes: [home, login, gisMap, enginDesign, repairCuring, emergencies, engineeringInfo, systemManage, error]
 })

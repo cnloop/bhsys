@@ -1,30 +1,30 @@
 <template>
-    <section class="tableProject">
-        <section class="tableProject-top">
-            <span>时间选择：</span>
-            <date-picker v-model="timeStart" placeholder="开始时间"></date-picker>
-            <span class="desc">至</span>
-            <date-picker v-model="timeEnd" placeholder="结束时间"></date-picker>
-            <span class="classSelectedText">类别选择:</span>
-            <san-select class="classSelectedOne" :seletedOneItem.sync="classSelectedOne" :projectData="classData"></san-select>
-            <san-button class="seatchBtn">
-                <i slot="icon" class="iconfont">&#xeef7;</i>查询
-            </san-button>
-            <san-button @click.stop.native="addClass" class="addBtn">
-                <i slot="icon" class="iconfont">&#xe602;</i>添加
-            </san-button>
-        </section>
-        <section class="tableProject-center">
-            <san-class-set-up-table :tableTheadData="tableTheadData" :tableTbodyData="tableTbodyData"></san-class-set-up-table>
-        </section>
-        <section class="tableProject-bottom">
-            <div class="tableProject-bottom-wrap tb-center">
-                <paginate :page-count="currentTotal" v-model="currentPage" :page-range="3" :margin-pages="2" :click-handler="paginateCallback" :prev-text="'上一页'" :next-text="'下一页'" :prev-class="'prev-item'" :prev-link-class="'prev-link-item'" :next-class="'next-item'" :next-link-class="'next-link-item'" :container-class="'pagination'" :page-class="'page-item'" :page-link-class="'page-link-item'" :active-class="'active-item'" :disabled-class="'disabled-item'">
-                </paginate>
-            </div>
-        </section>
-        <san-class-set-up-add-item :itemInfo="itemInfo" :isShowItemInfo="isShowItemInfo" @sanAddItemCallBack="sanAddItemCallBack"></san-class-set-up-add-item>
+  <section class="tableProject">
+    <section class="tableProject-top">
+      <span>时间选择：</span>
+      <date-picker v-model="timeStart" placeholder="开始时间"></date-picker>
+      <span class="desc">至</span>
+      <date-picker v-model="timeEnd" placeholder="结束时间"></date-picker>
+      <span class="classSelectedText">类别选择:</span>
+      <san-select class="classSelectedOne" :seletedOneItem.sync="classSelectedOne" :projectData="classData"></san-select>
+      <san-button class="seatchBtn">
+        <i slot="icon" class="iconfont">&#xeef7;</i>查询
+      </san-button>
+      <san-button @click.stop.native="addClass" class="addBtn">
+        <i slot="icon" class="iconfont">&#xe602;</i>添加
+      </san-button>
     </section>
+    <section class="tableProject-center">
+      <san-class-set-up-table :tableTheadData="tableTheadData" :tableTbodyData="tableTbodyData"></san-class-set-up-table>
+    </section>
+    <section class="tableProject-bottom">
+      <div class="tableProject-bottom-wrap tb-center">
+        <paginate :page-count="currentTotal" v-model="currentPage" :page-range="3" :margin-pages="2" :click-handler="paginateCallback" :prev-text="'上一页'" :next-text="'下一页'" :prev-class="'prev-item'" :prev-link-class="'prev-link-item'" :next-class="'next-item'" :next-link-class="'next-link-item'" :container-class="'pagination'" :page-class="'page-item'" :page-link-class="'page-link-item'" :active-class="'active-item'" :disabled-class="'disabled-item'">
+        </paginate>
+      </div>
+    </section>
+    <san-class-set-up-add-item :itemInfo="itemInfo" :isShowItemInfo="isShowItemInfo" @sanAddItemCallBack="sanAddItemCallBack"></san-class-set-up-add-item>
+  </section>
 </template>
 <script>
 import SanSelect from "@/components/Common/SanSelect";
@@ -180,6 +180,7 @@ export default {
   width: 100%;
   margin-top: 20px;
 }
+
 .tableProject-bottom {
   position: relative;
   height: 100px;

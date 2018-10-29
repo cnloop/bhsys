@@ -1,38 +1,38 @@
 <template>
-    <section class="EngineeringDOC">
-        <section class="EngineeringDOC-top">
-            <span>时间选择：</span>
-            <date-picker v-model="timeStart" placeholder="开始时间"></date-picker>
-            <span class="desc">至</span>
-            <date-picker v-model="timeEnd" placeholder="结束时间"></date-picker>
-            <span class="classSelectedText">类别选择:</span>
-            <san-select class="classSelectedOne" :seletedOneItem.sync="classSelectedOne" :projectData="classData"></san-select>
-            <san-button class="seatchBtn">
-                <i slot="icon" class="iconfont">&#xeef7;</i>查询
-            </san-button>
-            <san-button @click.stop.native="addClass" class="addBtn">
-                <i slot="icon" class="iconfont">&#xe602;</i>添加
-            </san-button>
-        </section>
-        <section class="EngineeringDOC-center">
-            <san-class-set-up-table :tableTheadData="tableTheadData" :tableTbodyData="tableTbodyData"></san-class-set-up-table>
-        </section>
-        <section class="EngineeringDOC-bottom">
-            <div class="EngineeringDOC-bottom-wrap tb-center">
-                <paginate :page-count="currentTotal" v-model="currentPage" :page-range="3" :margin-pages="2" :click-handler="paginateCallback" :prev-text="'上一页'" :next-text="'下一页'" :prev-class="'prev-item'" :prev-link-class="'prev-link-item'" :next-class="'next-item'" :next-link-class="'next-link-item'" :container-class="'pagination'" :page-class="'page-item'" :page-link-class="'page-link-item'" :active-class="'active-item'" :disabled-class="'disabled-item'">
-                </paginate>
-            </div>
-        </section>
-        <san-class-set-up-add-item :itemInfo="itemInfo" :isShowItemInfo="isShowItemInfo" @sanAddItemCallBack="sanAddItemCallBack"></san-class-set-up-add-item>
+  <section class="EngineeringDOC">
+    <section class="EngineeringDOC-top">
+      <span>时间选择：</span>
+      <date-picker v-model="timeStart" placeholder="开始时间"></date-picker>
+      <span class="desc">至</span>
+      <date-picker v-model="timeEnd" placeholder="结束时间"></date-picker>
+      <span class="projectSelectText">项目选择:</span>
+      <san-select class="projectSelectedOne" :seletedOneItem.sync="projectSelectedOne" :projectData="projectData"></san-select>
+      <span class="classSelectedText">类别选择:</span>
+      <san-select class="classSelectedOne" :seletedOneItem.sync="classSelectedOne" :projectData="classData"></san-select>
+      <san-button class="seatchBtn">
+        <i slot="icon" class="iconfont">&#xeef7;</i>查询
+      </san-button>
+      <san-button @click.stop.native="addClass" class="addBtn">
+        <i slot="icon" class="iconfont">&#xe602;</i>添加
+      </san-button>
     </section>
+    <section class="EngineeringDOC-center">
+      <san-table :tableTheadData="tableTheadData" :tableTbodyData="tableTbodyData"></san-table>
+    </section>
+    <section class="EngineeringDOC-bottom">
+      <div class="EngineeringDOC-bottom-wrap tb-center">
+        <paginate :page-count="currentTotal" v-model="currentPage" :page-range="3" :margin-pages="2" :click-handler="paginateCallback" :prev-text="'上一页'" :next-text="'下一页'" :prev-class="'prev-item'" :prev-link-class="'prev-link-item'" :next-class="'next-item'" :next-link-class="'next-link-item'" :container-class="'pagination'" :page-class="'page-item'" :page-link-class="'page-link-item'" :active-class="'active-item'" :disabled-class="'disabled-item'">
+        </paginate>
+      </div>
+    </section>
+    <san-add-item :itemInfo="itemInfo" :isShowItemInfo="isShowItemInfo" @sanAddItemCallBack="sanAddItemCallBack"></san-add-item>
+  </section>
 </template>
 <script>
 import SanSelect from "@/components/Common/SanSelect";
 import SanButton from "@/components/Common/SanButton";
 import SanTable from "@/components/Common/SanTable";
-import SanClassSetUpTable from "@/components/ItemCom/EnginDesign/SanClassSetUpTable";
-
-import SanClassSetUpAddItem from "@/components/ItemCom/EnginDesign/SanClassSetUpAddItem";
+import SanAddItem from "@/components/Common/SanAddItem";
 import Paginate from "vuejs-paginate";
 import DatePicker from "vue2-datepicker";
 export default {
@@ -40,72 +40,108 @@ export default {
     return {
       timeStart: "",
       timeEnd: "",
-      classData: ["施工图", "设计图纸", "竣工图纸"],
+      projectData: ["唐河地下涵", "宿县枢纽", "符离闸", "灵璧枢纽"],
+      projectSelectedOne: "请选择项目",
+      classData: [
+        "设施设备资料",
+        "项目信息资料",
+        "培训资料",
+        "操作规程",
+        "设计变更",
+        "工程大事记",
+        "会议纪要"
+      ],
       classSelectedOne: "请选择类别",
-      tableTheadData: ["类别名称", "所属类别", "操作时间", "操作人", "操作"],
+      tableTheadData: [
+        "项目名称",
+        "所属类别",
+        "文件名",
+        "附件",
+        "上传时间",
+        "上传人",
+        "操作"
+      ],
       tableTbodyData: [
         {
           id: "u1",
-          className: "施工图纸",
-          classNameClass: "设计管理",
-          actionDate: "2018-10-20 11:00",
-          actionPerson: "张俊"
+          name: "唐河地下涵",
+          class: "设施设备资料",
+          fileName: "唐河地下涵结构图",
+          count: 3,
+          uploadDate: "2018-10-20 12:00",
+          uploadPerson: "张俊"
         },
         {
           id: "u2",
-          className: "设计图纸",
-          classNameClass: "设计管理",
-          actionDate: "2018-10-20 11:00",
-          actionPerson: "张俊"
+          name: "宿县闸",
+          class: "项目信息资料",
+          fileName: "宿县闸施工图",
+          count: 6,
+          uploadDate: "2018-10-20 11:00",
+          uploadPerson: "张俊"
         },
         {
           id: "u3",
-          className: "文件资料",
-          classNameClass: "文档管理",
-          actionDate: "2018-10-20 11:00",
-          actionPerson: "张俊"
+          name: "刘卫涵",
+          class: "设施设备资料",
+          fileName: "刘卫涵施工图",
+          count: 3,
+          uploadDate: "2018-10-19 16:00",
+          uploadPerson: "李超群"
         },
         {
           id: "u4",
-          className: "来往资料",
-          classNameClass: "文档管理",
-          actionDate: "2018-10-20 11:00",
-          actionPerson: "张俊"
+          name: "大余闸",
+          class: "操作规程",
+          fileName: "大余闸机构图",
+          count: 6,
+          uploadDate: "2018-10-19 15:20",
+          uploadPerson: "李超群"
         },
         {
           id: "u5",
-          className: "计划文件",
-          classNameClass: "文档管理",
-          actionDate: "2018-10-20 11:00",
-          actionPerson: "张俊"
+          name: "团结涵",
+          class: "设计变更",
+          fileName: "团结涵结构图",
+          count: 8,
+          uploadDate: "2018-10-19 13:35",
+          uploadPerson: "李超群"
         },
         {
           id: "u6",
-          className: "设计变更",
-          classNameClass: "设计管理",
-          actionDate: "2018-10-20 11:00",
-          actionPerson: "张俊"
+          name: "大郑涵",
+          class: "培训资料",
+          fileName: "大郑涵结构图",
+          count: 4,
+          uploadDate: "2018-10-18 16:32",
+          uploadPerson: "王梓"
         },
         {
           id: "u7",
-          className: "工程大事记",
-          classNameClass: "文档管理",
-          actionDate: "2018-10-20 11:00",
-          actionPerson: "张俊"
+          name: "唐赵涵",
+          class: "工程大事记",
+          fileName: "唐赵涵竣工图纸",
+          count: 6,
+          uploadDate: "2018-10-17 14:32",
+          uploadPerson: "王梓"
         },
         {
           id: "u8",
-          className: "会议纪要",
-          classNameClass: "文档管理",
-          actionDate: "2018-10-20 11:00",
-          actionPerson: "张俊"
+          name: "唐河地下涵",
+          class: "工程大事记",
+          fileName: "唐河地下涵竣工图纸",
+          count: 11,
+          uploadDate: "2018-10-17 9:32",
+          uploadPerson: "王梓"
         },
         {
           id: "u9",
-          className: "设计变更",
-          classNameClass: "文档管理",
-          actionDate: "2018-10-20 11:00",
-          actionPerson: "张俊"
+          name: "团结涵",
+          class: "项目信息资料",
+          fileName: "团结涵竣工图纸",
+          count: 9,
+          uploadDate: "2018-10-13 9:24",
+          uploadPerson: "李超群"
         }
       ],
       itemInfo: "",
@@ -131,10 +167,9 @@ export default {
     SanSelect,
     SanButton,
     SanTable,
+    SanAddItem,
     DatePicker,
-    Paginate,
-    SanClassSetUpTable,
-    SanClassSetUpAddItem
+    Paginate
   }
 };
 </script>
@@ -160,6 +195,13 @@ export default {
 .EngineeringDOC-top .mx-input {
   height: 32px;
   font-size: 12px;
+}
+.EngineeringDOC-top .projectSelectText {
+  padding-left: 20px;
+  padding-right: 8px;
+}
+.EngineeringDOC-top .projectSelectedOne {
+  vertical-align: middle;
 }
 .EngineeringDOC-top .classSelectedText {
   padding-left: 20px;

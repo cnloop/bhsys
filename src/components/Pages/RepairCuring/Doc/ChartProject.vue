@@ -1,39 +1,33 @@
 <template>
-    <section class="chartProject">
-        <section class="chartProject-top">
-            <span>时间选择：</span>
-            <date-picker v-model="timeStart" placeholder="开始时间"></date-picker>
-            <span class="desc">至</span>
-            <date-picker v-model="timeEnd" placeholder="结束时间"></date-picker>
-            <span class="classSelectedText">类别选择:</span>
-            <san-select class="classSelectedOne" :seletedOneItem.sync="classSelectedOne" :projectData="classData"></san-select>
-            <san-button class="seatchBtn">
-                <i slot="icon" class="iconfont">&#xeef7;</i>查询
-            </san-button>
-            <san-button @click.stop.native="addClass" class="addBtn">
-                <i slot="icon" class="iconfont">&#xe602;</i>添加
-            </san-button>
-        </section>
-        <section class="chartProject-center">
-            <san-class-set-up-table :tableTheadData="tableTheadData" :tableTbodyData="tableTbodyData"></san-class-set-up-table>
-        </section>
-        <section class="chartProject-bottom">
-            <div class="chartProject-bottom-wrap tb-center">
-                <paginate :page-count="currentTotal" v-model="currentPage" :page-range="3" :margin-pages="2" :click-handler="paginateCallback" :prev-text="'上一页'" :next-text="'下一页'" :prev-class="'prev-item'" :prev-link-class="'prev-link-item'" :next-class="'next-item'" :next-link-class="'next-link-item'" :container-class="'pagination'" :page-class="'page-item'" :page-link-class="'page-link-item'" :active-class="'active-item'" :disabled-class="'disabled-item'">
-                </paginate>
-            </div>
-        </section>
-        <san-class-set-up-add-item :itemInfo="itemInfo" :isShowItemInfo="isShowItemInfo" @sanAddItemCallBack="sanAddItemCallBack"></san-class-set-up-add-item>
+  <section class="chartProject">
+    <section class="chartProject-top">
+      <span>时间选择：</span>
+      <date-picker v-model="timeStart" placeholder="开始时间"></date-picker>
+      <span class="desc">至</span>
+      <date-picker v-model="timeEnd" placeholder="结束时间"></date-picker>
+      <span class="classSelectedText">类别选择:</span>
+      <san-select class="classSelectedOne" :seletedOneItem.sync="classSelectedOne" :projectData="classData"></san-select>
+      <san-button class="seatchBtn">
+        <i slot="icon" class="iconfont">&#xeef7;</i>查询
+      </san-button>
+      <san-button @click.stop.native="addClass" class="addBtn">
+        <i slot="icon" class="iconfont">&#xe602;</i>添加
+      </san-button>
     </section>
+    <section class="chartProject-center">
+      <img class="chartImg" :src="require('@/assets/chart-1.png')" alt="">
+      <img class="chartImg" :src="require('@/assets/chart-2.png')" alt="">
+      <img class="chartImg" :src="require('@/assets/chart-3.png')" alt="">
+      <img class="chartImg" :src="require('@/assets/chart-4.png')" alt="">
+    </section>
+    <san-class-set-up-add-item :itemInfo="itemInfo" :isShowItemInfo="isShowItemInfo" @sanAddItemCallBack="sanAddItemCallBack"></san-class-set-up-add-item>
+  </section>
 </template>
 <script>
 import SanSelect from "@/components/Common/SanSelect";
 import SanButton from "@/components/Common/SanButton";
 import SanTable from "@/components/Common/SanTable";
-import SanClassSetUpTable from "@/components/ItemCom/EnginDesign/SanClassSetUpTable";
-
 import SanClassSetUpAddItem from "@/components/ItemCom/EnginDesign/SanClassSetUpAddItem";
-import Paginate from "vuejs-paginate";
 import DatePicker from "vue2-datepicker";
 export default {
   data() {
@@ -42,72 +36,6 @@ export default {
       timeEnd: "",
       classData: ["施工图", "设计图纸", "竣工图纸"],
       classSelectedOne: "请选择类别",
-      tableTheadData: ["类别名称", "所属类别", "操作时间", "操作人", "操作"],
-      tableTbodyData: [
-        {
-          id: "u1",
-          className: "施工图纸",
-          classNameClass: "设计管理",
-          actionDate: "2018-10-20 11:00",
-          actionPerson: "张俊"
-        },
-        {
-          id: "u2",
-          className: "设计图纸",
-          classNameClass: "设计管理",
-          actionDate: "2018-10-20 11:00",
-          actionPerson: "张俊"
-        },
-        {
-          id: "u3",
-          className: "文件资料",
-          classNameClass: "文档管理",
-          actionDate: "2018-10-20 11:00",
-          actionPerson: "张俊"
-        },
-        {
-          id: "u4",
-          className: "来往资料",
-          classNameClass: "文档管理",
-          actionDate: "2018-10-20 11:00",
-          actionPerson: "张俊"
-        },
-        {
-          id: "u5",
-          className: "计划文件",
-          classNameClass: "文档管理",
-          actionDate: "2018-10-20 11:00",
-          actionPerson: "张俊"
-        },
-        {
-          id: "u6",
-          className: "设计变更",
-          classNameClass: "设计管理",
-          actionDate: "2018-10-20 11:00",
-          actionPerson: "张俊"
-        },
-        {
-          id: "u7",
-          className: "工程大事记",
-          classNameClass: "文档管理",
-          actionDate: "2018-10-20 11:00",
-          actionPerson: "张俊"
-        },
-        {
-          id: "u8",
-          className: "会议纪要",
-          classNameClass: "文档管理",
-          actionDate: "2018-10-20 11:00",
-          actionPerson: "张俊"
-        },
-        {
-          id: "u9",
-          className: "设计变更",
-          classNameClass: "文档管理",
-          actionDate: "2018-10-20 11:00",
-          actionPerson: "张俊"
-        }
-      ],
       itemInfo: "",
       isShowItemInfo: false,
       currentPage: 1,
@@ -132,8 +60,6 @@ export default {
     SanButton,
     SanTable,
     DatePicker,
-    Paginate,
-    SanClassSetUpTable,
     SanClassSetUpAddItem
   }
 };
@@ -178,152 +104,16 @@ export default {
 
 .chartProject-center {
   width: 100%;
+  /* margin-top: 20px; */
+}
+
+.chartProject-center > .chartImg {
+  width: 100%;
+  height: auto;
+  display: block;
   margin-top: 20px;
 }
-.chartProject-bottom {
-  position: relative;
-  height: 100px;
-}
-.chartProject-bottom-wrap {
-  right: 0px;
-}
-
-.chartProject-bottom-wrap .page-item {
-  float: left;
-  width: 60px;
-  height: 40px;
-  line-height: 40px;
-  box-sizing: content-box;
-}
-
-.chartProject-bottom-wrap .page-link-item {
-  height: 100%;
-  display: inline-block;
-  width: 100%;
-  text-align: center;
-  border: 1px solid #8fb3d0;
-  border-right: none;
-  color: #a9a1a1;
-}
-
-.chartProject-bottom-wrap .prev-item {
-  float: left;
-  height: 40px;
-  line-height: 40px;
-}
-.chartProject-bottom-wrap .prev-link-item {
-  height: 100%;
-  display: inline-block;
-  padding: 0 10px;
-  text-align: center;
-  border: 1px solid #8fb3d0;
-  color: #a9a1a1;
-  border-right: none;
-}
-.chartProject-bottom-wrap .next-item {
-  display: inline-block;
-  height: 40px;
-  line-height: 40px;
-}
-.chartProject-bottom-wrap .next-link-item {
-  height: 100%;
-  display: inline-block;
-  padding: 0 10px;
-  text-align: center;
-  color: #a9a1a1;
-  border: 1px solid #8fb3d0;
-}
-
-.chartProject-bottom-wrap .active-item > .page-link-item {
-  color: #fff !important;
-  background-color: #2666e8;
-}
-.chartProject-bottom-wrap .active-item > .page-link-item {
-  /* color: #337ab7; */
-  color: red;
-}
-.chartProject-bottom-wrap .disabled-item {
-  cursor: not-allowed;
-}
-.chartProject-bottom-wrap .disabled-item > .prev-link-item {
-  color: #ddd;
-  cursor: not-allowed;
-}
-.chartProject-bottom-wrap .disabled-item > .next-link-item {
-  color: #ddd;
-  cursor: not-allowed;
-}
-.chartProject-bottom {
-  position: relative;
-  height: 100px;
-}
-.chartProject-bottom-wrap {
-  right: 0px;
-}
-
-.chartProject-bottom-wrap .page-item {
-  float: left;
-  width: 60px;
-  height: 40px;
-  line-height: 40px;
-  box-sizing: content-box;
-}
-
-.chartProject-bottom-wrap .page-link-item {
-  height: 100%;
-  display: inline-block;
-  width: 100%;
-  text-align: center;
-  border: 1px solid #8fb3d0;
-  border-right: none;
-  color: #a9a1a1;
-}
-
-.chartProject-bottom-wrap .prev-item {
-  float: left;
-  height: 40px;
-  line-height: 40px;
-}
-.chartProject-bottom-wrap .prev-link-item {
-  height: 100%;
-  display: inline-block;
-  padding: 0 10px;
-  text-align: center;
-  border: 1px solid #8fb3d0;
-  color: #a9a1a1;
-  border-right: none;
-}
-.chartProject-bottom-wrap .next-item {
-  display: inline-block;
-  height: 40px;
-  line-height: 40px;
-}
-.chartProject-bottom-wrap .next-link-item {
-  height: 100%;
-  display: inline-block;
-  padding: 0 10px;
-  text-align: center;
-  color: #a9a1a1;
-  border: 1px solid #8fb3d0;
-}
-
-.chartProject-bottom-wrap .active-item > .page-link-item {
-  color: #fff !important;
-  background-color: #2666e8;
-}
-.chartProject-bottom-wrap .active-item > .page-link-item {
-  /* color: #337ab7; */
-  color: red;
-}
-.chartProject-bottom-wrap .disabled-item {
-  cursor: not-allowed;
-}
-.chartProject-bottom-wrap .disabled-item > .prev-link-item {
-  color: #ddd;
-  cursor: not-allowed;
-}
-.chartProject-bottom-wrap .disabled-item > .next-link-item {
-  color: #ddd;
-  cursor: not-allowed;
+.chartProject-center > .chartImg:last-child {
+  margin-bottom: 20px;
 }
 </style>

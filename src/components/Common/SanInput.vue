@@ -7,7 +7,7 @@
 export default {
   props: ["sanInputValue"],
   created() {
-    this.setStyle;
+    this.setStyle();
   },
   methods: {
     updateInputValue(event) {

@@ -1,36 +1,36 @@
 <template>
-    <section class="checkProject">
-        <section class="checkProject-top">
-            <span>时间选择：</span>
-            <date-picker v-model="timeStart" placeholder="开始时间"></date-picker>
-            <span class="desc">至</span>
-            <date-picker v-model="timeEnd" placeholder="结束时间"></date-picker>
-            <span class="classSelectedText">类别选择:</span>
-            <san-select class="classSelectedOne" :seletedOneItem.sync="classSelectedOne" :projectData="classData"></san-select>
-            <san-button class="seatchBtn">
-                <i slot="icon" class="iconfont">&#xeef7;</i>查询
-            </san-button>
-            <san-button @click.stop.native="addClass" class="addBtn">
-                <i slot="icon" class="iconfont">&#xe602;</i>添加
-            </san-button>
-        </section>
-        <section class="checkProject-center">
-            <san-class-set-up-table :tableTheadData="tableTheadData" :tableTbodyData="tableTbodyData"></san-class-set-up-table>
-        </section>
-        <section class="checkProject-bottom">
-            <div class="checkProject-bottom-wrap tb-center">
-                <paginate :page-count="currentTotal" v-model="currentPage" :page-range="3" :margin-pages="2" :click-handler="paginateCallback" :prev-text="'上一页'" :next-text="'下一页'" :prev-class="'prev-item'" :prev-link-class="'prev-link-item'" :next-class="'next-item'" :next-link-class="'next-link-item'" :container-class="'pagination'" :page-class="'page-item'" :page-link-class="'page-link-item'" :active-class="'active-item'" :disabled-class="'disabled-item'">
-                </paginate>
-            </div>
-        </section>
-        <san-class-set-up-add-item :itemInfo="itemInfo" :isShowItemInfo="isShowItemInfo" @sanAddItemCallBack="sanAddItemCallBack"></san-class-set-up-add-item>
+  <section class="checkProject">
+    <section class="checkProject-top">
+      <span>时间选择：</span>
+      <date-picker v-model="timeStart" placeholder="开始时间"></date-picker>
+      <span class="desc">至</span>
+      <date-picker v-model="timeEnd" placeholder="结束时间"></date-picker>
+      <span class="classSelectedText">类别选择:</span>
+      <san-select class="classSelectedOne" :seletedOneItem.sync="classSelectedOne" :projectData="classData"></san-select>
+      <san-button class="seatchBtn">
+        <i slot="icon" class="iconfont">&#xeef7;</i>查询
+      </san-button>
+      <san-button @click.stop.native="addClass" class="addBtn">
+        <i slot="icon" class="iconfont">&#xe602;</i>添加
+      </san-button>
     </section>
+    <section class="checkProject-center">
+      <check-table :tableTheadData="tableTheadData" :tableTbodyData="tableTbodyData"></check-table>
+    </section>
+    <section class="checkProject-bottom">
+      <div class="checkProject-bottom-wrap tb-center">
+        <paginate :page-count="currentTotal" v-model="currentPage" :page-range="3" :margin-pages="2" :click-handler="paginateCallback" :prev-text="'上一页'" :next-text="'下一页'" :prev-class="'prev-item'" :prev-link-class="'prev-link-item'" :next-class="'next-item'" :next-link-class="'next-link-item'" :container-class="'pagination'" :page-class="'page-item'" :page-link-class="'page-link-item'" :active-class="'active-item'" :disabled-class="'disabled-item'">
+        </paginate>
+      </div>
+    </section>
+    <san-class-set-up-add-item :itemInfo="itemInfo" :isShowItemInfo="isShowItemInfo" @sanAddItemCallBack="sanAddItemCallBack"></san-class-set-up-add-item>
+  </section>
 </template>
 <script>
 import SanSelect from "@/components/Common/SanSelect";
 import SanButton from "@/components/Common/SanButton";
 import SanTable from "@/components/Common/SanTable";
-import SanClassSetUpTable from "@/components/ItemCom/EnginDesign/SanClassSetUpTable";
+import CheckTable from "@/components/ItemCom/RepairCuring/CheckTable";
 
 import SanClassSetUpAddItem from "@/components/ItemCom/EnginDesign/SanClassSetUpAddItem";
 import Paginate from "vuejs-paginate";
@@ -42,70 +42,70 @@ export default {
       timeEnd: "",
       classData: ["施工图", "设计图纸", "竣工图纸"],
       classSelectedOne: "请选择类别",
-      tableTheadData: ["类别名称", "所属类别", "操作时间", "操作人", "操作"],
+      tableTheadData: [
+        "维修单号",
+        "维修设备",
+        "维修级别",
+        "报修时间",
+        "归档状态",
+        "操作"
+      ],
       tableTbodyData: [
         {
           id: "u1",
-          className: "施工图纸",
-          classNameClass: "设计管理",
-          actionDate: "2018-10-20 11:00",
-          actionPerson: "张俊"
+          number: "WXDH-2303-9807",
+          machine: "叶调机构",
+          grade: "小修",
+          reportDate: "2018-10-20 12:00",
+          state: "未归档"
         },
         {
           id: "u2",
-          className: "设计图纸",
-          classNameClass: "设计管理",
-          actionDate: "2018-10-20 11:00",
-          actionPerson: "张俊"
+          number: "WXDH-2303-9806",
+          machine: "励磁系统",
+          grade: "小修",
+          reportDate: "2018-10-20 12:00",
+          state: "未归档"
         },
         {
           id: "u3",
-          className: "文件资料",
-          classNameClass: "文档管理",
-          actionDate: "2018-10-20 11:00",
-          actionPerson: "张俊"
+          number: "WXDH-2303-9805",
+          machine: "液压启闭机",
+          grade: "大修",
+          reportDate: "2018-10-29 12:00",
+          state: "已归档"
         },
         {
           id: "u4",
-          className: "来往资料",
-          classNameClass: "文档管理",
-          actionDate: "2018-10-20 11:00",
-          actionPerson: "张俊"
+          number: "WXDH-2303-9804",
+          machine: "分水闸",
+          grade: "专项",
+          reportDate: "2018-10-29 12:00",
+          state: "已归档"
         },
         {
           id: "u5",
-          className: "计划文件",
-          classNameClass: "文档管理",
-          actionDate: "2018-10-20 11:00",
-          actionPerson: "张俊"
+          number: "WXDH-2303-9803",
+          machine: "压力传感器",
+          grade: "小修",
+          reportDate: "2018-10-29 12:00",
+          state: "已归档"
         },
         {
           id: "u6",
-          className: "设计变更",
-          classNameClass: "设计管理",
-          actionDate: "2018-10-20 11:00",
-          actionPerson: "张俊"
+          number: "WXDH-2303-9802",
+          machine: "出口液压闸门",
+          grade: "小修",
+          reportDate: "2018-10-29 12:00",
+          state: "已归档"
         },
         {
           id: "u7",
-          className: "工程大事记",
-          classNameClass: "文档管理",
-          actionDate: "2018-10-20 11:00",
-          actionPerson: "张俊"
-        },
-        {
-          id: "u8",
-          className: "会议纪要",
-          classNameClass: "文档管理",
-          actionDate: "2018-10-20 11:00",
-          actionPerson: "张俊"
-        },
-        {
-          id: "u9",
-          className: "设计变更",
-          classNameClass: "文档管理",
-          actionDate: "2018-10-20 11:00",
-          actionPerson: "张俊"
+          number: "WXDH-2303-9801",
+          machine: "脚踏阀",
+          grade: "小修",
+          reportDate: "2018-10-29 12:00",
+          state: "已归档"
         }
       ],
       itemInfo: "",
@@ -133,7 +133,7 @@ export default {
     SanTable,
     DatePicker,
     Paginate,
-    SanClassSetUpTable,
+    CheckTable,
     SanClassSetUpAddItem
   }
 };

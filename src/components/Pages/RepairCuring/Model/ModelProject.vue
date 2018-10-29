@@ -1,40 +1,39 @@
 <template>
-    <section class="modelProject">
-        <section class="modelProject-top">
-            <span>时间选择：</span>
-            <date-picker v-model="timeStart" placeholder="开始时间"></date-picker>
-            <span class="desc">至</span>
-            <date-picker v-model="timeEnd" placeholder="结束时间"></date-picker>
-            <span class="classSelectedText">类别选择:</span>
-            <san-select class="classSelectedOne" :seletedOneItem.sync="classSelectedOne" :projectData="classData"></san-select>
-            <san-button class="seatchBtn">
-                <i slot="icon" class="iconfont">&#xeef7;</i>查询
-            </san-button>
-            <san-button @click.stop.native="addClass" class="addBtn">
-                <i slot="icon" class="iconfont">&#xe602;</i>添加
-            </san-button>
-        </section>
-        <section class="modelProject-center">
-            <san-class-set-up-table :tableTheadData="tableTheadData" :tableTbodyData="tableTbodyData"></san-class-set-up-table>
-        </section>
-        <section class="modelProject-bottom">
-            <div class="modelProject-bottom-wrap tb-center">
-                <paginate :page-count="currentTotal" v-model="currentPage" :page-range="3" :margin-pages="2" :click-handler="paginateCallback" :prev-text="'上一页'" :next-text="'下一页'" :prev-class="'prev-item'" :prev-link-class="'prev-link-item'" :next-class="'next-item'" :next-link-class="'next-link-item'" :container-class="'pagination'" :page-class="'page-item'" :page-link-class="'page-link-item'" :active-class="'active-item'" :disabled-class="'disabled-item'">
-                </paginate>
-            </div>
-        </section>
-        <san-class-set-up-add-item :itemInfo="itemInfo" :isShowItemInfo="isShowItemInfo" @sanAddItemCallBack="sanAddItemCallBack"></san-class-set-up-add-item>
+  <section class="modelProject">
+    <section class="modelProject-top">
+      <span class="descSpan">工作摘要：</span>
+      <san-input></san-input>
+      <span class="descSpan">故障摘要：</span>
+      <san-input></san-input>
+      <san-button class="searchBtn">
+        <i slot="icon" class="iconfont">&#xeef7;</i>查询
+      </san-button>
+      <san-button @click.stop.native="addClass" class="addBtn">
+        <i slot="icon" class="iconfont">&#xe602;</i>添加
+      </san-button>
     </section>
+    <section class="modelProject-center">
+      <model-table :tableTheadData="tableTheadData" :tableTbodyData="tableTbodyData"></model-table>
+    </section>
+    <section class="modelProject-bottom">
+      <div class="modelProject-bottom-wrap tb-center">
+        <paginate :page-count="currentTotal" v-model="currentPage" :page-range="3" :margin-pages="2" :click-handler="paginateCallback" :prev-text="'上一页'" :next-text="'下一页'" :prev-class="'prev-item'" :prev-link-class="'prev-link-item'" :next-class="'next-item'" :next-link-class="'next-link-item'" :container-class="'pagination'" :page-class="'page-item'" :page-link-class="'page-link-item'" :active-class="'active-item'" :disabled-class="'disabled-item'">
+        </paginate>
+      </div>
+    </section>
+    <model-add-item :itemInfo="itemInfo" :isShowItemInfo="isShowItemInfo" @sanAddItemCallBack="sanAddItemCallBack"></model-add-item>
+  </section>
 </template>
 <script>
 import SanSelect from "@/components/Common/SanSelect";
+import SanInput from "@/components/Common/SanInput";
 import SanButton from "@/components/Common/SanButton";
 import SanTable from "@/components/Common/SanTable";
-import SanClassSetUpTable from "@/components/ItemCom/EnginDesign/SanClassSetUpTable";
 
-import SanClassSetUpAddItem from "@/components/ItemCom/EnginDesign/SanClassSetUpAddItem";
+import ModelAddItem from "@/components/ItemCom/RepairCuring/ModelAddItem";
+import ModelTable from "@/components/ItemCom/RepairCuring/ModelTable";
+
 import Paginate from "vuejs-paginate";
-import DatePicker from "vue2-datepicker";
 export default {
   data() {
     return {
@@ -42,70 +41,116 @@ export default {
       timeEnd: "",
       classData: ["施工图", "设计图纸", "竣工图纸"],
       classSelectedOne: "请选择类别",
-      tableTheadData: ["类别名称", "所属类别", "操作时间", "操作人", "操作"],
+      tableTheadData: [
+        "设备类型",
+        "维修级别",
+        "工作摘要",
+        "工作描述",
+        "故障摘要",
+        "故障描述",
+        "计划摘要",
+        "计划描述",
+        "操作"
+      ],
       tableTbodyData: [
         {
           id: "u1",
-          className: "施工图纸",
-          classNameClass: "设计管理",
-          actionDate: "2018-10-20 11:00",
-          actionPerson: "张俊"
+          className: "机械",
+          grade: "大修",
+          summary: "大修",
+          desc: "测试",
+          trouble: "检车网络故障",
+          troubleDesc: "测试",
+          plan: "通讯",
+          planDesc: "修理通讯故障"
         },
         {
           id: "u2",
-          className: "设计图纸",
-          classNameClass: "设计管理",
-          actionDate: "2018-10-20 11:00",
-          actionPerson: "张俊"
+          className: "电气",
+          grade: "大修",
+          summary: "大修",
+          desc: "测试",
+          trouble: "检车网络故障",
+          troubleDesc: "测试",
+          plan: "通讯",
+          planDesc: "修理通讯故障"
         },
         {
           id: "u3",
-          className: "文件资料",
-          classNameClass: "文档管理",
-          actionDate: "2018-10-20 11:00",
-          actionPerson: "张俊"
+          className: "机械",
+          grade: "大修",
+          summary: "大修",
+          desc: "测试",
+          trouble: "检车网络故障",
+          troubleDesc: "测试",
+          plan: "通讯",
+          planDesc: "修理通讯故障"
         },
         {
           id: "u4",
-          className: "来往资料",
-          classNameClass: "文档管理",
-          actionDate: "2018-10-20 11:00",
-          actionPerson: "张俊"
+          className: "机械",
+          grade: "大修",
+          summary: "大修",
+          desc: "测试",
+          trouble: "检车网络故障",
+          troubleDesc: "测试",
+          plan: "通讯",
+          planDesc: "修理通讯故障"
         },
         {
           id: "u5",
-          className: "计划文件",
-          classNameClass: "文档管理",
-          actionDate: "2018-10-20 11:00",
-          actionPerson: "张俊"
+          className: "机械",
+          grade: "大修",
+          summary: "大修",
+          desc: "测试",
+          trouble: "检车网络故障",
+          troubleDesc: "测试",
+          plan: "通讯",
+          planDesc: "修理通讯故障"
         },
         {
           id: "u6",
-          className: "设计变更",
-          classNameClass: "设计管理",
-          actionDate: "2018-10-20 11:00",
-          actionPerson: "张俊"
+          className: "机械",
+          grade: "大修",
+          summary: "大修",
+          desc: "测试",
+          trouble: "检车网络故障",
+          troubleDesc: "测试",
+          plan: "通讯",
+          planDesc: "修理通讯故障"
         },
         {
           id: "u7",
-          className: "工程大事记",
-          classNameClass: "文档管理",
-          actionDate: "2018-10-20 11:00",
-          actionPerson: "张俊"
+          className: "机械",
+          grade: "大修",
+          summary: "大修",
+          desc: "测试",
+          trouble: "检车网络故障",
+          troubleDesc: "测试",
+          plan: "通讯",
+          planDesc: "修理通讯故障"
         },
         {
           id: "u8",
-          className: "会议纪要",
-          classNameClass: "文档管理",
-          actionDate: "2018-10-20 11:00",
-          actionPerson: "张俊"
+          className: "网络",
+          grade: "大修",
+          summary: "大修",
+          desc: "测试",
+          trouble: "检车网络故障",
+          troubleDesc: "测试",
+          plan: "通讯",
+          planDesc: "修理通讯故障"
         },
         {
           id: "u9",
-          className: "设计变更",
-          classNameClass: "文档管理",
-          actionDate: "2018-10-20 11:00",
-          actionPerson: "张俊"
+          className: "通信",
+          grade: "大修",
+          summary: "大修",
+          desc: "测试",
+          trouble: "检车网络故障",
+          troubleDesc: "测试",
+          plan: "通讯",
+          planDesc: "修理通讯故障"
         }
       ],
       itemInfo: "",
@@ -128,13 +173,13 @@ export default {
     paginateCallback() {}
   },
   components: {
+    SanInput,
     SanSelect,
     SanButton,
     SanTable,
-    DatePicker,
     Paginate,
-    SanClassSetUpTable,
-    SanClassSetUpAddItem
+    ModelAddItem,
+    ModelTable
   }
 };
 </script>
@@ -153,27 +198,14 @@ export default {
   color: #7f7f7f;
   box-sizing: border-box;
 }
-.modelProject-top .mx-datepicker {
-  width: 180px;
-  padding: 0px 8px;
+.modelProject-top .descSpan {
+  padding: 0px 20px;
 }
-.modelProject-top .mx-input {
-  height: 32px;
-  font-size: 12px;
+.modelProject-top .descSpan:nth-child(1) {
+  padding: 0px 0px;
 }
-.modelProject-top .classSelectedText {
-  padding-left: 20px;
-  padding-right: 8px;
-}
-.modelProject-top .classSelectedOne {
-  vertical-align: middle;
-}
-.modelProject-top .seatchBtn {
-  vertical-align: middle;
+.modelProject-top .searchBtn {
   margin: 0px 20px;
-}
-.modelProject-top .addBtn {
-  vertical-align: middle;
 }
 
 .modelProject-center {

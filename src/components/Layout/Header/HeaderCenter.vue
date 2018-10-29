@@ -34,6 +34,12 @@
         <span>工程信息</span>
       </div>
     </router-link>
+    <router-link to="/system-manage" class="headerRight-item-wrap">
+      <div class="headerRight-item all-center">
+        <img :src="require('@/assets/nav-7.png')">
+        <span>系统管理</span>
+      </div>
+    </router-link>
 
   </section>
 </template>
